@@ -1,40 +1,47 @@
-<mapper namespace="com.deliveryservice.repo.IOrdersDAO">
-    <resultMap id="OrdersResultMap" type="com.deliveryservice.model.Orders">
-        <id property="orderId" column="order_id"/>
-        <result property="clientId" column="client_id"/>
-        <result property="orderDate" column="order_date"/>
-        <result property="destinationAddressId" column="destination_address_id"/>
-        <result property="status" column="status"/>
+<mapper namespace="com.deliveryservice.repo.IDeliveryDAO">
+    <resultMap id="DeliveryResultMap" type="com.deliveryservice.model.Delivery">
+        <id property="id" column="id"/>
+        <result property="carId" column="car_id"/>
+        <result property="routeId" column="route_id"/>
+        <result property="departureTime" column="departure_time"/>
+        <result property="estimatedArrivalTime" column="estimated_arrival_time"/>
+        <result property="actualArrivalTime" column="actual_arrival_time"/>
+        <result property="type" column="type"/>
     </resultMap>
 
-    <select id="readById" resultMap="OrdersResultMap">
-        SELECT * FROM Orders WHERE order_id = #{orderId}
+    <select id="readById" resultMap="DeliveryResultMap">
+        SELECT * FROM Delivery WHERE id = #{id}
     </select>
 
-    <select id="readAll" resultMap="OrdersResultMap">
-        SELECT * FROM Orders
+    <select id="readAll" resultMap="DeliveryResultMap">
+        SELECT * FROM Delivery
     </select>
 
-    <select id="readAllByClientId" resultMap="OrdersResultMap">
-        SELECT * FROM Orders WHERE client_id = #{clientId}
+    <select id="readAllByCarId" resultMap="DeliveryResultMap">
+        SELECT * FROM Delivery WHERE car_id = #{carId}
+    </select>
+
+    <select id="readAllByRouteId" resultMap="DeliveryResultMap">
+        SELECT * FROM Delivery WHERE route_id = #{routeId}
     </select>
 
     <delete id="deleteById">
-        DELETE FROM Orders WHERE order_id = #{orderId}
+        DELETE FROM Delivery WHERE id = #{id}
     </delete>
 
     <update id="update">
-        UPDATE Orders SET
-        client_id = #{orders.clientId},
-        order_date = #{orders.orderDate},
-        destination_address_id = #{orders.destinationAddressId},
-        status = #{orders.status}
-        WHERE order_id = #{orders.orderId}
+        UPDATE Delivery SET
+        car_id = #{delivery.carId},
+        route_id = #{delivery.routeId},
+        departure_time = #{delivery.departureTime},
+        estimated_arrival_time = #{delivery.estimatedArrivalTime},
+        actual_arrival_time = #{delivery.actualArrivalTime},
+        type = #{delivery.type}
+        WHERE id = #{delivery.id}
     </update>
 
     <insert id="create">
-        INSERT INTO Orders (client_id, order_date, destination_address_id, status)
-        VALUES (#{orders.clientId}, #{orders.orderDate}, #{orders.destinationAddressId}, #{orders.status})
+        INSERT INTO Delivery (car_id, route_id, departure_time, estimated_arrival_time, actual_arrival_time, type)
+        VALUES (#{delivery.carId}, #{delivery.routeId}, #{delivery.departureTime}, #{delivery.estimatedArrivalTime}, #{delivery.actualArrivalTime}, #{delivery.type})
     </insert>
 </mapper>
-
