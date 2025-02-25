@@ -1,7 +1,6 @@
 package com.solvd.delivopt.repo.impl.mybatis;
 
 import com.solvd.delivopt.repo.IDAO;
-import com.solvd.delivopt.repo.IDAOUtility;
 import com.solvd.delivopt.util.MyBatisLoader;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.LogManager;
@@ -13,8 +12,8 @@ import java.util.List;
  * @author Vadym Spitsyn
  * @created 2025-02-13
  */
-public abstract class AbstractMyBatisImpl<T,ID> implements IDAO<T,ID>, IDAOUtility<T,ID> {
-    private static final Logger log = LogManager.getLogger(AbstractMyBatisImpl.class);
+public abstract class AbstractBaseMyBatisImpl<T,ID> implements IDAO<T,ID>{
+    private static final Logger log = LogManager.getLogger(AbstractBaseMyBatisImpl.class);
 
     @Override
     public T readById(ID id) {
@@ -81,12 +80,12 @@ public abstract class AbstractMyBatisImpl<T,ID> implements IDAO<T,ID>, IDAOUtili
     public List<T> readAll() {
         try (SqlSession session = MyBatisLoader.getSqlSessionFactory().openSession()) {
             Object mapper = session.getMapper(getMapperClass());
-            IDAOUtility<T, ID> utility = (IDAOUtility<T, ID>) mapper;
+            IDAO<T, ID> utility = (IDAO<T, ID>) mapper;
 
             List<T> entityList = utility.readAll();
 
             if (entityList != null && !entityList.isEmpty()) {
-                log.info("{}List: {} were successfully readAllByForeignKeyId from database table: {}",
+                log.info("{}List: {} were successfully readAll from database table: {}",
                         entityList.get(0).getClass().getSimpleName(), entityList, getTableName());
             } else {
                 log.info("No records found in database table: {}", getTableName());

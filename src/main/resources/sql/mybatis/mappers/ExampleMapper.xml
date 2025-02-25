@@ -28,6 +28,12 @@
         FROM transactions
     </select>
 
+    <select id="readAllByForeignKeyId" resultMap="TransactionResultMap">
+        SELECT Id, from_account_id, to_account_id, transaction_type, amount, transaction_date, description, status
+        FROM transactions
+        WHERE from_account_id = #{id} OR to_account_id = #{id}
+    </select>
+
     <delete id="deleteById">
         DELETE FROM transactions
         WHERE Id = #{id}
