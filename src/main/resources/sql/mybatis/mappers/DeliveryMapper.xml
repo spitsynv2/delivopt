@@ -1,0 +1,47 @@
+<mapper namespace="com.deliveryservice.repo.IDeliveryDAO">
+    <resultMap id="DeliveryResultMap" type="com.deliveryservice.model.Delivery">
+        <id property="id" column="id"/>
+        <result property="carId" column="car_id"/>
+        <result property="routeId" column="route_id"/>
+        <result property="departureTime" column="departure_time"/>
+        <result property="estimatedArrivalTime" column="estimated_arrival_time"/>
+        <result property="actualArrivalTime" column="actual_arrival_time"/>
+        <result property="type" column="type"/>
+    </resultMap>
+
+    <select id="readById" resultMap="DeliveryResultMap">
+        SELECT * FROM Delivery WHERE id = #{id}
+    </select>
+
+    <select id="readAll" resultMap="DeliveryResultMap">
+        SELECT * FROM Delivery
+    </select>
+
+    <select id="readAllByCarId" resultMap="DeliveryResultMap">
+        SELECT * FROM Delivery WHERE car_id = #{carId}
+    </select>
+
+    <select id="readAllByRouteId" resultMap="DeliveryResultMap">
+        SELECT * FROM Delivery WHERE route_id = #{routeId}
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM Delivery WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE Delivery SET
+        car_id = #{delivery.carId},
+        route_id = #{delivery.routeId},
+        departure_time = #{delivery.departureTime},
+        estimated_arrival_time = #{delivery.estimatedArrivalTime},
+        actual_arrival_time = #{delivery.actualArrivalTime},
+        type = #{delivery.type}
+        WHERE id = #{delivery.id}
+    </update>
+
+    <insert id="create">
+        INSERT INTO Delivery (car_id, route_id, departure_time, estimated_arrival_time, actual_arrival_time, type)
+        VALUES (#{delivery.carId}, #{delivery.routeId}, #{delivery.departureTime}, #{delivery.estimatedArrivalTime}, #{delivery.actualArrivalTime}, #{delivery.type})
+    </insert>
+</mapper>

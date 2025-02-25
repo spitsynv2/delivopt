@@ -1,0 +1,35 @@
+<mapper namespace="com.deliveryservice.repo.IClientDAO">
+    <resultMap id="ClientResultMap" type="com.deliveryservice.model.Client">
+        <id property="id" column="id"/>
+        <result property="clientName" column="client_name"/>
+        <result property="email" column="email"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="addressId" column="address_id"/>
+    </resultMap>
+
+    <select id="readById" resultMap="ClientResultMap">
+        SELECT * FROM Client WHERE id = #{id}
+    </select>
+
+    <select id="readAll" resultMap="ClientResultMap">
+        SELECT * FROM Client
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM Client WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE Client SET
+        client_name = #{client.clientName},
+        email = #{client.email},
+        phone_number = #{client.phoneNumber},
+        address_id = #{client.addressId}
+        WHERE id = #{id}
+    </update>
+
+    <insert id="create">
+        INSERT INTO Client (client_name, email, phone_number, address_id)
+        VALUES (#{client.clientName}, #{client.email}, #{client.phoneNumber}, #{client.addressId})
+    </insert>
+</mapper>
