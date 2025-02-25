@@ -1,0 +1,33 @@
+<mapper namespace="com.deliveryservice.repo.IWarehouseDAO">
+    <resultMap id="WarehouseResultMap" type="com.deliveryservice.model.Warehouse">
+        <id property="warehouseId" column="warehouse_id"/>
+        <result property="warehouseAddressId" column="warehouse_address_id"/>
+        <result property="warehouseName" column="warehouse_name"/>
+        <result property="capacity" column="capacity"/>
+    </resultMap>
+
+    <select id="readById" resultMap="WarehouseResultMap">
+        SELECT * FROM Warehouse WHERE warehouse_id = #{warehouseId}
+    </select>
+
+    <select id="readAll" resultMap="WarehouseResultMap">
+        SELECT * FROM Warehouse
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM Warehouse WHERE warehouse_id = #{warehouseId}
+    </delete>
+
+    <update id="update">
+        UPDATE Warehouse SET
+        warehouse_address_id = #{warehouse.warehouseAddressId},
+        warehouse_name = #{warehouse.warehouseName},
+        capacity = #{warehouse.capacity}
+        WHERE warehouse_id = #{warehouse.warehouseId}
+    </update>
+
+    <insert id="create">
+        INSERT INTO Warehouse (warehouse_address_id, warehouse_name, capacity)
+        VALUES (#{warehouse.warehouseAddressId}, #{warehouse.warehouseName}, #{warehouse.capacity})
+    </insert>
+</mapper>
