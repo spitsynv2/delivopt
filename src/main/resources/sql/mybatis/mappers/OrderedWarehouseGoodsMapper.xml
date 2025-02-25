@@ -1,0 +1,37 @@
+<mapper namespace="com.deliveryservice.repo.IOrderedWarehouseGoodsDAO">
+    <resultMap id="OrderedWarehouseGoodsResultMap" type="com.deliveryservice.model.OrderedWarehouseGoods">
+        <id property="orderId" column="order_id"/>
+        <id property="warehouseId" column="warehouse_id"/>
+        <id property="goodsId" column="goods_id"/>
+        <result property="quantity" column="quantity"/>
+    </resultMap>
+
+    <select id="readByOrderId" resultMap="OrderedWarehouseGoodsResultMap">
+        SELECT * FROM Ordered_Warehouse_Goods WHERE order_id = #{orderId}
+    </select>
+
+    <select id="readAll" resultMap="OrderedWarehouseGoodsResultMap">
+        SELECT * FROM Ordered_Warehouse_Goods
+    </select>
+
+    <select id="readAllByWarehouseId" resultMap="OrderedWarehouseGoodsResultMap">
+        SELECT * FROM Ordered_Warehouse_Goods WHERE warehouse_id = #{warehouseId}
+    </select>
+
+    <delete id="deleteByOrderAndGoodsId">
+        DELETE FROM Ordered_Warehouse_Goods WHERE order_id = #{orderId} AND goods_id = #{goodsId}
+    </delete>
+
+    <update id="update">
+        UPDATE Ordered_Warehouse_Goods SET
+        quantity = #{orderedWarehouseGoods.quantity}
+        WHERE order_id = #{orderedWarehouseGoods.orderId}
+        AND warehouse_id = #{orderedWarehouseGoods.warehouseId}
+        AND goods_id = #{orderedWarehouseGoods.goodsId}
+    </update>
+
+    <insert id="create">
+        INSERT INTO Ordered_Warehouse_Goods (order_id, warehouse_id, goods_id, quantity)
+        VALUES (#{orderedWarehouseGoods.orderId}, #{orderedWarehouseGoods.warehouseId}, #{orderedWarehouseGoods.goodsId}, #{orderedWarehouseGoods.quantity})
+    </insert>
+</mapper>
