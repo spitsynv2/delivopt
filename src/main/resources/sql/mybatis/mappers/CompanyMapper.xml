@@ -1,0 +1,31 @@
+<mapper namespace="com.deliveryservice.repo.ICompanyDAO">
+    <resultMap id="CompanyResultMap" type="com.deliveryservice.model.Company">
+        <id property="id" column="id"/>
+        <result property="companyName" column="company_name"/>
+        <result property="addressId" column="address_id"/>
+    </resultMap>
+
+    <select id="readById" resultMap="CompanyResultMap">
+        SELECT * FROM Company WHERE id = #{id}
+    </select>
+
+    <select id="readAll" resultMap="CompanyResultMap">
+        SELECT * FROM Company
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM Company WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE Company SET
+            company_name = #{company.companyName},
+            address_id = #{company.addressId}
+        WHERE id = #{company.id}
+    </update>
+
+    <insert id="create">
+        INSERT INTO Company (company_name, address_id)
+        VALUES (#{company.companyName}, #{company.addressId})
+    </insert>
+</mapper>

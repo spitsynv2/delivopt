@@ -1,14 +1,14 @@
 <mapper namespace="com.deliveryservice.repo.ICarDAO">
     <resultMap id="CarResultMap" type="com.deliveryservice.model.Car">
-        <id property="carId" column="car_id"/>
+        <id property="id" column="id"/>
         <result property="carType" column="car_type"/>
         <result property="maxWeightCapacity" column="max_weight_capacity"/>
         <result property="maxVolumeCapacity" column="max_volume_capacity"/>
-        <result property="currentWarehouseId" column="current_warehouse_id"/>
+        <result property="ownerCompanyId" column="owner_company_id"/>
     </resultMap>
 
     <select id="readById" resultMap="CarResultMap">
-        SELECT * FROM Car WHERE car_id = #{carId}
+        SELECT * FROM Car WHERE id = #{id}
     </select>
 
     <select id="readAll" resultMap="CarResultMap">
@@ -16,7 +16,7 @@
     </select>
 
     <delete id="deleteById">
-        DELETE FROM Car WHERE car_id = #{carId}
+        DELETE FROM Car WHERE id = #{id}
     </delete>
 
     <update id="update">
@@ -24,12 +24,12 @@
         car_type = #{car.carType},
         max_weight_capacity = #{car.maxWeightCapacity},
         max_volume_capacity = #{car.maxVolumeCapacity},
-        current_warehouse_id = #{car.currentWarehouseId}
-        WHERE car_id = #{car.carId}
+        owner_company_id = #{car.ownerCompanyId}
+        WHERE id = #{car.id}
     </update>
 
     <insert id="create">
-        INSERT INTO Car (car_type, max_weight_capacity, max_volume_capacity, current_warehouse_id)
-        VALUES (#{car.carType}, #{car.maxWeightCapacity}, #{car.maxVolumeCapacity}, #{car.currentWarehouseId})
+        INSERT INTO Car (car_type, max_weight_capacity, max_volume_capacity, owner_company_id)
+        VALUES (#{car.carType}, #{car.maxWeightCapacity}, #{car.maxVolumeCapacity}, #{car.ownerCompanyId})
     </insert>
 </mapper>

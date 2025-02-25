@@ -1,6 +1,6 @@
 <mapper namespace="com.deliveryservice.repo.IGoodsDAO">
     <resultMap id="GoodsResultMap" type="com.deliveryservice.model.Goods">
-        <id property="goodsId" column="goods_id"/>
+        <id property="id" column="id"/>
         <result property="goodsName" column="goods_name"/>
         <result property="description" column="description"/>
         <result property="weight" column="weight"/>
@@ -8,7 +8,7 @@
     </resultMap>
 
     <select id="readById" resultMap="GoodsResultMap">
-        SELECT * FROM Goods WHERE goods_id = #{goodsId}
+        SELECT * FROM Goods WHERE id = #{id}
     </select>
 
     <select id="readAll" resultMap="GoodsResultMap">
@@ -16,7 +16,7 @@
     </select>
 
     <delete id="deleteById">
-        DELETE FROM Goods WHERE goods_id = #{goodsId}
+        DELETE FROM Goods WHERE id = #{id}
     </delete>
 
     <update id="update">
@@ -25,7 +25,7 @@
         description = #{goods.description},
         weight = #{goods.weight},
         volume = #{goods.volume}
-        WHERE goods_id = #{goods.goodsId}
+        WHERE id = #{goods.id}
     </update>
 
     <insert id="create">
