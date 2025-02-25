@@ -7,5 +7,5 @@ import java.util.List;
  * @created 2025-02-13
  */
 public interface IDAOUtility<T,ID> {
-    List<T> readAll();
+    List<T> readAllByForeignKeyId(ID id);
 }
