@@ -1,0 +1,35 @@
+<mapper namespace="com.deliveryservice.repo.IGoodsDAO">
+    <resultMap id="GoodsResultMap" type="com.deliveryservice.model.Goods">
+        <id property="goodsId" column="goods_id"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="description" column="description"/>
+        <result property="weight" column="weight"/>
+        <result property="volume" column="volume"/>
+    </resultMap>
+
+    <select id="readById" resultMap="GoodsResultMap">
+        SELECT * FROM Goods WHERE goods_id = #{goodsId}
+    </select>
+
+    <select id="readAll" resultMap="GoodsResultMap">
+        SELECT * FROM Goods
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM Goods WHERE goods_id = #{goodsId}
+    </delete>
+
+    <update id="update">
+        UPDATE Goods SET
+        goods_name = #{goods.goodsName},
+        description = #{goods.description},
+        weight = #{goods.weight},
+        volume = #{goods.volume}
+        WHERE goods_id = #{goods.goodsId}
+    </update>
+
+    <insert id="create">
+        INSERT INTO Goods (goods_name, description, weight, volume)
+        VALUES (#{goods.goodsName}, #{goods.description}, #{goods.weight}, #{goods.volume})
+    </insert>
+</mapper>

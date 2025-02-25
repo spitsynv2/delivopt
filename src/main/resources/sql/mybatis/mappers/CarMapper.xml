@@ -1,0 +1,35 @@
+<mapper namespace="com.deliveryservice.repo.ICarDAO">
+    <resultMap id="CarResultMap" type="com.deliveryservice.model.Car">
+        <id property="carId" column="car_id"/>
+        <result property="carType" column="car_type"/>
+        <result property="maxWeightCapacity" column="max_weight_capacity"/>
+        <result property="maxVolumeCapacity" column="max_volume_capacity"/>
+        <result property="currentWarehouseId" column="current_warehouse_id"/>
+    </resultMap>
+
+    <select id="readById" resultMap="CarResultMap">
+        SELECT * FROM Car WHERE car_id = #{carId}
+    </select>
+
+    <select id="readAll" resultMap="CarResultMap">
+        SELECT * FROM Car
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM Car WHERE car_id = #{carId}
+    </delete>
+
+    <update id="update">
+        UPDATE Car SET
+        car_type = #{car.carType},
+        max_weight_capacity = #{car.maxWeightCapacity},
+        max_volume_capacity = #{car.maxVolumeCapacity},
+        current_warehouse_id = #{car.currentWarehouseId}
+        WHERE car_id = #{car.carId}
+    </update>
+
+    <insert id="create">
+        INSERT INTO Car (car_type, max_weight_capacity, max_volume_capacity, current_warehouse_id)
+        VALUES (#{car.carType}, #{car.maxWeightCapacity}, #{car.maxVolumeCapacity}, #{car.currentWarehouseId})
+    </insert>
+</mapper>
