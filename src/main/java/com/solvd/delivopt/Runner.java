@@ -1,5 +1,6 @@
 package com.solvd.delivopt;
 
+import com.solvd.delivopt.model.Company;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
