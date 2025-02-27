@@ -15,6 +15,7 @@ public class Order {
     private OrderStatus status;
     private Long clientId;
     private Address destinationAddress;
+    //LIMITATION --> all orderedGoods must be from same warehouse.
     private List<OrderedGoods> orderedGoods;
     private Double totalWeight;
     private Double totalVolume;

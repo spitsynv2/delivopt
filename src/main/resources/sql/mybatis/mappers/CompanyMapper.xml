@@ -1,8 +1,12 @@
-<mapper namespace="com.deliveryservice.repo.ICompanyDAO">
-    <resultMap id="CompanyResultMap" type="com.deliveryservice.model.Company">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.delivopt.repo.ICompanyDAO">
+    <resultMap id="CompanyResultMap" type="com.solvd.delivopt.model.Company">
         <id property="id" column="id"/>
         <result property="companyName" column="company_name"/>
-        <result property="addressId" column="address_id"/>
     </resultMap>
 
     <select id="readById" resultMap="CompanyResultMap">
@@ -19,13 +23,13 @@
 
     <update id="update">
         UPDATE Company SET
-            company_name = #{company.companyName},
-            address_id = #{company.addressId}
-        WHERE id = #{company.id}
+            company_name = #{companyName},
+            address_id = #{address.id}
+        WHERE id = #{id}
     </update>
 
     <insert id="create">
         INSERT INTO Company (company_name, address_id)
-        VALUES (#{company.companyName}, #{company.addressId})
+        VALUES (#{companyName}, #{address.id})
     </insert>
 </mapper>
