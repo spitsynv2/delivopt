@@ -7,4 +7,5 @@ import com.solvd.delivopt.model.Client;
  * @created 2025-02-26
  */
 public interface IClientDAO extends IDAO<Client,Long> {
+    boolean checkEmailExist(String email);
 }

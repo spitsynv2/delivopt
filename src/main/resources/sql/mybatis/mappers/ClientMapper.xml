@@ -1,10 +1,14 @@
-<mapper namespace="com.deliveryservice.repo.IClientDAO">
-    <resultMap id="ClientResultMap" type="com.deliveryservice.model.Client">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.delivopt.repo.IClientDAO">
+    <resultMap id="ClientResultMap" type="com.solvd.delivopt.model.Client">
         <id property="id" column="id"/>
         <result property="clientName" column="client_name"/>
         <result property="email" column="email"/>
         <result property="phoneNumber" column="phone_number"/>
-        <result property="addressId" column="address_id"/>
     </resultMap>
 
     <select id="readById" resultMap="ClientResultMap">
@@ -21,15 +25,20 @@
 
     <update id="update">
         UPDATE Client SET
-        client_name = #{client.clientName},
-        email = #{client.email},
-        phone_number = #{client.phoneNumber},
-        address_id = #{client.addressId}
+        client_name = #{clientName},
+        email = #{email},
+        phone_number = #{phoneNumber},
+        address_id = #{address.id}
         WHERE id = #{id}
     </update>
 
     <insert id="create">
         INSERT INTO Client (client_name, email, phone_number, address_id)
-        VALUES (#{client.clientName}, #{client.email}, #{client.phoneNumber}, #{client.addressId})
+        VALUES (#{clientName}, #{email}, #{phoneNumber}, #{address.id})
     </insert>
+
+    <select id="checkEmailExist" resultType="boolean">
+        SELECT COUNT(*) > 0 FROM Client WHERE email = #{email}
+    </select>
+
 </mapper>

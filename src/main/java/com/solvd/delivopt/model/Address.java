@@ -8,7 +8,7 @@ public class Address {
     private Long id;
     private String street;
     private String city;
-    private String postcode;
+    private String postCode;
     private Double latitude;
     private Double longitude;
 
@@ -38,12 +38,12 @@ public class Address {
         this.city = city;
     }
 
-    public String getPostcode() {
-        return postcode;
+    public String getPostCode() {
+        return postCode;
     }
 
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
     }
 
     public Double getLatitude() {
@@ -67,7 +67,7 @@ public class Address {
         return "Address{" +
                 "longitude=" + longitude +
                 ", latitude=" + latitude +
-                ", postcode='" + postcode + '\'' +
+                ", postCode='" + postCode + '\'' +
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 ", id=" + id +

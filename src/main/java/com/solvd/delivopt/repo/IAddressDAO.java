@@ -7,4 +7,7 @@ import com.solvd.delivopt.model.Address;
  * @created 2025-02-26
  */
 public interface IAddressDAO extends IDAO<Address,Long> {
+    Address readByClientId(Long clientId);
+    Address readByWarehouseId(Long warehouseId);
+    Address readByCompanyId(Long companyId);
 }

@@ -1,17 +1,56 @@
 package com.solvd.delivopt;
 
-import com.solvd.delivopt.model.Company;
+import com.solvd.delivopt.model.*;
+import com.solvd.delivopt.repo.impl.mybatis.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-/**
- * Hello world!
- *
- */
+import java.util.List;
+
 public class Runner {
     private static final Logger log = LogManager.getLogger(Runner.class);
 
     public static void main(String[] args ) {
+        //AddressMyBatisImpl addressMyBatis = new AddressMyBatisImpl();
+        //List<Address> addresses = addressMyBatis.readAll();
+        //Address address = addressMyBatis.readById(1L);
+        //address.setCity("TEST");
+        //addressMyBatis.update(address);
+        //addressMyBatis.create(address);
+        //addressMyBatis.deleteById(8L);
 
+        //CarMyBatisImpl carMyBatis = new CarMyBatisImpl();
+        //List<Car> cars = carMyBatis.readAll();
+        //Car car = carMyBatis.readById(1L);
+        //car.setCarType("TEST");
+        //carMyBatis.update(car);
+        //carMyBatis.create(car);
+        //carMyBatis.deleteById(4L);
+        //carMyBatis.readByDeliveryId(1L);
+        //carMyBatis.readAllByCompanyId(1L);
+
+        //ClientMyBatisImpl clientMyBatis = new ClientMyBatisImpl();
+        //Client client = clientMyBatis.readById(1L);
+        //client.setAddress(addressMyBatis.readByClientId(client.getId()));
+        //log.info(client);
+        //clientMyBatis.update(client);
+        //client.setEmail("TEST@MAIL.COM");
+        //clientMyBatis.checkEmailExist("TEST@MAIL.COM");
+
+        //CompanyMyBatisImpl companyMyBatis = new CompanyMyBatisImpl();
+        //Company company = companyMyBatis.readById(1L);
+        //company.setAddress(addressMyBatis.readByCompanyId(company.getId()));
+        //log.info(company);
+        //companyMyBatis.update(company);
+        //company.setCompanyName("TEST");
+        //companyMyBatis.create(company);
+
+        //DeliveryMyBatisImpl deliveryMyBatis = new DeliveryMyBatisImpl();
+        //Delivery delivery = deliveryMyBatis.readById(1L);
+        //delivery.setCar(carMyBatis.readByDeliveryId(delivery.getId()));
+        //deliveryMyBatis.update(delivery);
+        //deliveryMyBatis.create(delivery);
+        //deliveryMyBatis.readAllByOrderId(1L);
+        //deliveryMyBatis.readAllByRouteId(1L);
     }
 }
