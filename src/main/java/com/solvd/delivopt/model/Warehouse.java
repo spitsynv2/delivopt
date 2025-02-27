@@ -10,7 +10,7 @@ public class Warehouse {
     private Long id;
     private Address warehouseAddress;
     private String warehouseName;
-    private Company ownerCompany;
+    private Long ownerCompanyId;
     private Map<Goods, Integer> goodsInventory;
 
     public Warehouse() {}
@@ -23,12 +23,12 @@ public class Warehouse {
         this.goodsInventory = goodsInventory;
     }
 
-    public Company getOwnerCompany() {
-        return ownerCompany;
+    public Long getOwnerCompanyId() {
+        return ownerCompanyId;
     }
 
-    public void setOwnerCompany(Company ownerCompany) {
-        this.ownerCompany = ownerCompany;
+    public void setOwnerCompanyId(Long ownerCompanyId) {
+        this.ownerCompanyId = ownerCompanyId;
     }
 
     public String getWarehouseName() {
@@ -61,7 +61,7 @@ public class Warehouse {
                 "id=" + id +
                 ", warehouseAddress=" + warehouseAddress +
                 ", warehouseName='" + warehouseName + '\'' +
-                ", ownerCompany=" + ownerCompany +
+                ", ownerCompanyId=" + ownerCompanyId +
                 ", goodsInventory=" + goodsInventory +
                 '}';
     }

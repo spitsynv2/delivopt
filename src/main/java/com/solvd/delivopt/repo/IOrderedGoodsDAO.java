@@ -1,8 +1,10 @@
 package com.solvd.delivopt.repo;
 
+import com.solvd.delivopt.model.OrderedGoods;
+
 /**
  * @author Vadym Spitsyn
  * @created 2025-02-26
  */
-public interface IOrderedGoodsDAO {
+public interface IOrderedGoodsDAO extends IDAO<OrderedGoods,Long> {
 }

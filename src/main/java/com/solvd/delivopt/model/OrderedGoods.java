@@ -5,7 +5,7 @@ package com.solvd.delivopt.model;
  * @created 2025-02-26
  */
 public class OrderedGoods {
-    private Warehouse warehouse;
+    private Long warehouseId;
     private Goods goods;
     private Integer quantity;
 
@@ -27,12 +27,12 @@ public class OrderedGoods {
         this.goods = goods;
     }
 
-    public Warehouse getWarehouse() {
-        return warehouse;
+    public Long getWarehouseId() {
+        return warehouseId;
     }
 
-    public void setWarehouse(Warehouse warehouse) {
-        this.warehouse = warehouse;
+    public void setWarehouseId(Long warehouseId) {
+        this.warehouseId = warehouseId;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class OrderedGoods {
         return "OrderedGoods{" +
                 "goods=" + goods +
                 ", quantity=" + quantity +
-                ", warehouse=" + warehouse +
+                ", warehouseId=" + warehouseId +
                 '}';
     }
 }

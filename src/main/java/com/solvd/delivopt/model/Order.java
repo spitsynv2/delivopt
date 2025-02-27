@@ -1,5 +1,7 @@
 package com.solvd.delivopt.model;
 
+import com.solvd.delivopt.model.enums.OrderStatus;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -9,11 +11,13 @@ import java.util.List;
  */
 public class Order {
     private Long id;
-    private Client client;
-    private Address destinationAddress;
     private LocalDateTime orderDate;
-    private String status;
+    private OrderStatus status;
+    private Long clientId;
+    private Address destinationAddress;
     private List<OrderedGoods> orderedGoods;
+    private Double totalWeight;
+    private Double totalVolume;
 
     public Order() {}
 
@@ -25,11 +29,11 @@ public class Order {
         this.orderedGoods = orderedGoods;
     }
 
-    public String getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 
@@ -49,12 +53,12 @@ public class Order {
         this.destinationAddress = destinationAddress;
     }
 
-    public Client getClient() {
-        return client;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
     public Long getId() {
@@ -65,15 +69,59 @@ public class Order {
         this.id = id;
     }
 
+    public Double getTotalWeight() {
+        if (totalWeight == null){
+            totalWeight = calcTotalWeight();
+        }
+        return totalWeight;
+    }
+
+    public void setTotalWeight(Double totalWeight) {
+        this.totalWeight = totalWeight;
+    }
+
+    public Double getTotalVolume() {
+        if (totalVolume == null){
+            totalVolume = calcTotalVolume();
+        }
+        return totalVolume;
+    }
+
+    public void setTotalVolume(Double totalVolume) {
+        this.totalVolume = totalVolume;
+    }
+
+    public Double calcTotalWeight(){
+        double ordersWeight = 0;
+        for (OrderedGoods orderedGood : orderedGoods) {
+            if (orderedGood.getGoods().getWeight() != null && orderedGood.getQuantity() != null) {
+                ordersWeight = ordersWeight + orderedGood.getGoods().getWeight() * orderedGood.getQuantity();
+            }
+        }
+        return ordersWeight;
+    }
+
+    public Double calcTotalVolume(){
+        double ordersVolume = 0;
+        for (OrderedGoods orderedGood : orderedGoods) {
+            if (orderedGood.getGoods().getVolume() != null && orderedGood.getQuantity() != null) {
+                ordersVolume = ordersVolume + orderedGood.getGoods().getVolume() * orderedGood.getQuantity();
+            }
+        }
+        return ordersVolume;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
-                "orderedGoods=" + orderedGoods +
-                ", status='" + status + '\'' +
+                "id=" + id +
                 ", orderDate=" + orderDate +
+                ", status=" + status +
+                ", clientId='" + clientId + '\'' +
                 ", destinationAddress=" + destinationAddress +
-                ", client=" + client +
-                ", id=" + id +
+                ", orderedGoods=" + orderedGoods +
+                ", totalWeight=" + totalWeight +
+                ", totalVolume=" + totalVolume +
                 '}';
     }
 }
