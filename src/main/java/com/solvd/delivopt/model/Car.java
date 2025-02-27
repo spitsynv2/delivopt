@@ -9,16 +9,16 @@ public class Car {
     private String carType;
     private Double maxWeightCapacity;
     private Double maxVolumeCapacity;
-    private Company ownerCompany;
+    private Long ownerCompanyId;
 
     public Car() {}
 
-    public Company getOwnerCompany() {
-        return ownerCompany;
+    public Long getOwnerCompanyId() {
+        return ownerCompanyId;
     }
 
-    public void setOwnerCompany(Company ownerCompany) {
-        this.ownerCompany = ownerCompany;
+    public void setOwnerCompanyId(Long ownerCompanyId) {
+        this.ownerCompanyId = ownerCompanyId;
     }
 
     public Double getMaxVolumeCapacity() {
@@ -60,7 +60,7 @@ public class Car {
                 ", carType='" + carType + '\'' +
                 ", maxWeightCapacity=" + maxWeightCapacity +
                 ", maxVolumeCapacity=" + maxVolumeCapacity +
-                ", ownerCompany=" + ownerCompany +
+                ", ownerCompanyId=" + ownerCompanyId +
                 '}';
     }
 }

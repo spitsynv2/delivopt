@@ -9,6 +9,7 @@ import java.util.List;
 public class DeliveryOptimizer {
     private List<Company> companies;
     private List<Client> clients;
+    private List<Delivery> deliveries;
 
     public DeliveryOptimizer() {}
 
@@ -28,11 +29,20 @@ public class DeliveryOptimizer {
         this.clients = clients;
     }
 
+    public List<Delivery> getDeliveries() {
+        return deliveries;
+    }
+
+    public void setDeliveries(List<Delivery> deliveries) {
+        this.deliveries = deliveries;
+    }
+
     @Override
     public String toString() {
         return "DeliveryOptimizer{" +
                 "companies=" + companies +
                 ", clients=" + clients +
+                ", deliveries=" + deliveries +
                 '}';
     }
 }

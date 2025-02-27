@@ -1,5 +1,7 @@
 package com.solvd.delivopt.model;
 
+import com.solvd.delivopt.model.enums.DeliveryType;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -9,13 +11,12 @@ import java.util.List;
  */
 public class Delivery {
     private Long id;
-    private Car car;
-    private Route route;
     private LocalDateTime departureTime;
     private LocalDateTime estimatedArrivalTime;
-    private LocalDateTime actualArrivalTime;
-    private String type;
+    private DeliveryType type;
+    private Car car;
     private List<Order> orders;
+    private List<Route> routes;
 
     public Delivery() {}
 
@@ -27,20 +28,12 @@ public class Delivery {
         this.orders = orders;
     }
 
-    public String getType() {
+    public DeliveryType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(DeliveryType type) {
         this.type = type;
-    }
-
-    public LocalDateTime getActualArrivalTime() {
-        return actualArrivalTime;
-    }
-
-    public void setActualArrivalTime(LocalDateTime actualArrivalTime) {
-        this.actualArrivalTime = actualArrivalTime;
     }
 
     public LocalDateTime getEstimatedArrivalTime() {
@@ -59,12 +52,12 @@ public class Delivery {
         this.departureTime = departureTime;
     }
 
-    public Route getRoute() {
-        return route;
+    public List<Route> getRoutes() {
+        return routes;
     }
 
-    public void setRoute(Route route) {
-        this.route = route;
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
     }
 
     public Car getCar() {
@@ -87,13 +80,12 @@ public class Delivery {
     public String toString() {
         return "Delivery{" +
                 "id=" + id +
-                ", car=" + car +
-                ", route=" + route +
                 ", departureTime=" + departureTime +
                 ", estimatedArrivalTime=" + estimatedArrivalTime +
-                ", actualArrivalTime=" + actualArrivalTime +
-                ", type='" + type + '\'' +
+                ", type=" + type +
+                ", car=" + car +
                 ", orders=" + orders +
+                ", routes=" + routes +
                 '}';
     }
 }
