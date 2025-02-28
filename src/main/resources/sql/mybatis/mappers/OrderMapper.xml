@@ -12,6 +12,9 @@
 
         <association property="destinationAddress" javaType="com.solvd.delivopt.model.Address"
                      select="com.solvd.delivopt.repo.IAddressDAO.readById" column="destination_address_id"/>
+
+        <collection property="orderedGoods" ofType="com.solvd.delivopt.model.OrderedGoods"
+                    select="com.solvd.delivopt.repo.IOrderedGoodsDAO.readAllByOrderId" column="id"/>
     </resultMap>
 
     <select id="readById" resultMap="OrdersResultMap">

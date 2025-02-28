@@ -75,8 +75,8 @@ public class Runner {
         //orderedGoods.setQuantity(5);
         //orderedGoodsMyBatis.update(7L,orderedGoods);
 
-        //OrderMyBatisImpl orderMyBatis = new OrderMyBatisImpl();
-        //orderMyBatis.readAll();
+        OrderMyBatisImpl orderMyBatis = new OrderMyBatisImpl();
+        orderMyBatis.readAll();
         //orderMyBatis.readAllByClientId(1L);
         //orderMyBatis.readAllByDeliveryId(1L);
         //orderMyBatis.create(orderMyBatis.readById(2L));
