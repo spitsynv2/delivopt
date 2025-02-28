@@ -1,21 +1,20 @@
 package com.solvd.delivopt;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.solvd.delivopt.model.*;
 import com.solvd.delivopt.model.enums.DeliveryType;
 import com.solvd.delivopt.model.enums.OrderStatus;
 import com.solvd.delivopt.repo.impl.mybatis.*;
 import com.solvd.delivopt.util.DeliveryMapper;
+import com.solvd.delivopt.util.Graph;
+import com.solvd.delivopt.util.Dijkstra;
+import com.solvd.delivopt.util.HarvesineDistance;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
 
 
 public class Runner {
@@ -98,7 +97,39 @@ public class Runner {
         //routeMyBatis.readAll();
 
 
+
+
+        Graph graph = new Graph();
+
+        // Add nodes (addresses)
         Address warehouseAddress1 = new Address();
+        Address clientAddress1 = new Address();
+
+        graph.addNode(1L, warehouseAddress1);
+        graph.addNode(2L, clientAddress1);
+
+        HarvesineDistance harvesineDistance = new HarvesineDistance();
+
+        double distance = harvesineDistance.calculateDistance(
+                warehouseAddress1.getLatitude(), warehouseAddress1.getLongitude(),
+                clientAddress1.getLatitude(), clientAddress1.getLongitude()
+        );
+        System.out.println("Distance between warehouse and client: " + distance + " km");
+
+        // Add edges (routes between warehouse and client)
+        graph.addEdge(1L, 2L, distance);
+
+        // Use Dijkstra to find shortest path from warehouse (1) to client (2)
+        Map<Long, Double> shortestPaths = Dijkstra.calculateShortestPath(graph, 1L);
+
+        System.out.println("Shortest path from Warehouse to Client: " + shortestPaths.get(2L) + " km");
+
+        // Use Dijkstra to find shortest path from client (2) to warehouse (1)
+        Map<Long, Double> reverseShortestPaths = Dijkstra.calculateShortestPath(graph, 2L);
+
+        System.out.println("Shortest path from Client to Warehouse: " + reverseShortestPaths.get(1L) + " km");
+
+
         warehouseAddress1.setId(1L);
         warehouseAddress1.setStreet("Mazowiecka 1");
         warehouseAddress1.setCity("Warsaw");
@@ -106,7 +137,6 @@ public class Runner {
         warehouseAddress1.setLatitude(52.2298);
         warehouseAddress1.setLongitude(21.0122);
 
-        Address clientAddress1 = new Address();
         clientAddress1.setId(2L);
         clientAddress1.setStreet("Pilsudskiego 15");
         clientAddress1.setCity("Warsaw");
@@ -152,15 +182,14 @@ public class Runner {
         client3.setPhoneNumber("+48 602 703 804");
         client3.setAddress(clientAddress3);
 
-        // Create a Car for the delivery
+
         Car car = new Car();
         car.setId(1L);
         car.setCarType("Truck");
         car.setMaxWeightCapacity(2000.0);
         car.setMaxVolumeCapacity(15.0);
-        car.setOwnerCompanyId(1L);  // Example company ID
+        car.setOwnerCompanyId(1L);
 
-        // Create Orders for the delivery
         Order order1 = createOrder(client1, clientAddress1, 1L);
         Order order2 = createOrder(client2, clientAddress2, 2L);
         Order order3 = createOrder(client3, clientAddress3, 3L);
@@ -200,6 +229,9 @@ public class Runner {
         } catch (IOException e) {
             System.err.println("Error writing JSON to file: " + e.getMessage());
         }
+
+
+
 
     }
 
