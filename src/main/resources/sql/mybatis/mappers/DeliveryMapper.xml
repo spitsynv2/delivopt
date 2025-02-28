@@ -1,11 +1,13 @@
-<mapper namespace="com.deliveryservice.repo.IDeliveryDAO">
-    <resultMap id="DeliveryResultMap" type="com.deliveryservice.model.Delivery">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.delivopt.repo.IDeliveryDAO">
+    <resultMap id="DeliveryResultMap" type="com.solvd.delivopt.model.Delivery">
         <id property="id" column="id"/>
-        <result property="carId" column="car_id"/>
-        <result property="routeId" column="route_id"/>
         <result property="departureTime" column="departure_time"/>
         <result property="estimatedArrivalTime" column="estimated_arrival_time"/>
-        <result property="actualArrivalTime" column="actual_arrival_time"/>
         <result property="type" column="type"/>
     </resultMap>
 
@@ -17,31 +19,73 @@
         SELECT * FROM Delivery
     </select>
 
-    <select id="readAllByCarId" resultMap="DeliveryResultMap">
-        SELECT * FROM Delivery WHERE car_id = #{carId}
-    </select>
-
-    <select id="readAllByRouteId" resultMap="DeliveryResultMap">
-        SELECT * FROM Delivery WHERE route_id = #{routeId}
-    </select>
-
     <delete id="deleteById">
         DELETE FROM Delivery WHERE id = #{id}
     </delete>
 
     <update id="update">
         UPDATE Delivery SET
-        car_id = #{delivery.carId},
-        route_id = #{delivery.routeId},
-        departure_time = #{delivery.departureTime},
-        estimated_arrival_time = #{delivery.estimatedArrivalTime},
-        actual_arrival_time = #{delivery.actualArrivalTime},
-        type = #{delivery.type}
-        WHERE id = #{delivery.id}
+        car_id = #{car.id},
+        departure_time = #{departureTime},
+        estimated_arrival_time = #{estimatedArrivalTime},
+        type = #{type}
+        WHERE id = #{id}
     </update>
 
     <insert id="create">
-        INSERT INTO Delivery (car_id, route_id, departure_time, estimated_arrival_time, actual_arrival_time, type)
-        VALUES (#{delivery.carId}, #{delivery.routeId}, #{delivery.departureTime}, #{delivery.estimatedArrivalTime}, #{delivery.actualArrivalTime}, #{delivery.type})
+        INSERT INTO Delivery (car_id, departure_time, estimated_arrival_time, type)
+        VALUES (#{car.id}, #{departureTime}, #{estimatedArrivalTime}, #{type})
     </insert>
+
+
+    <select id="readAllByOrderId" resultMap="DeliveryResultMap">
+        SELECT * FROM Delivery
+        WHERE id IN (
+        SELECT delivery_id FROM Orders_Delivery
+        WHERE order_id = #{id}
+        );
+    </select>
+
+    <update id="updateOrdersDelivery">
+        UPDATE Orders_Delivery
+        SET order_id = #{newOrderId},
+        delivery_id = #{newDeliveryId}
+        WHERE order_id = #{orderId} AND delivery_id = #{deliveryId};
+    </update>
+
+    <insert id="createOrdersDelivery">
+        INSERT INTO Orders_Delivery (order_id, delivery_id)
+        VALUES (#{orderId}, #{deliveryId})
+    </insert>
+
+    <delete id="deleteOrdersDelivery">
+        DELETE FROM Orders_Delivery WHERE order_id = #{orderId} AND delivery_id = #{deliveryId};
+    </delete>
+
+
+    <select id="readAllByRouteId" resultMap="DeliveryResultMap">
+        SELECT * FROM Delivery
+        WHERE id IN (
+        SELECT delivery_id FROM Delivery_routes
+        WHERE route_id = #{id}
+        );
+    </select>
+
+    <update id="updateDeliveryRoutes">
+        UPDATE Delivery_routes
+        SET route_id = #{newRouteId},
+        delivery_id = #{newDeliveryId},
+        sequence = #{sequence}
+        WHERE route_id = #{routeId} AND delivery_id = #{deliveryId};
+    </update>
+
+    <insert id="createDeliveryRoutes">
+        INSERT INTO Delivery_routes (route_id, delivery_id, sequence)
+        VALUES (#{routeId}, #{deliveryId}, #{sequence})
+    </insert>
+
+    <delete id="deleteDeliveryRoutes">
+        DELETE FROM Delivery_routes WHERE route_id = #{routeId} AND delivery_id = #{deliveryId};
+    </delete>
+
 </mapper>

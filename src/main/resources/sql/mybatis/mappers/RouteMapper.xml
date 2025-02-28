@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.delivopt.repo.IRouteDAO">
+    <resultMap id="RoutesResultMap" type="com.solvd.delivopt.model.Route">
+        <id property="id" column="id"/>
+        <result property="distanceKm" column="distance_km"/>
+        <result property="estimatedTimeMin" column="estimated_time_min"/>
+        <result property="lastUpdated" column="last_updated"/>
+
+        <association property="fromAddress" javaType="com.solvd.delivopt.model.Address"
+                     select="com.solvd.delivopt.repo.IAddressDAO.readById" column="from_address_id"/>
+
+        <association property="toAddress" javaType="com.solvd.delivopt.model.Address"
+                     select="com.solvd.delivopt.repo.IAddressDAO.readById" column="to_address_id"/>
+    </resultMap>
+
+    <select id="readById" resultMap="RoutesResultMap">
+        SELECT * FROM Routes WHERE id = #{id}
+    </select>
+
+    <select id="readAll" resultMap="RoutesResultMap">
+        SELECT * FROM Routes
+    </select>
+
+    <select id="readAllByFromAddressId" resultMap="RoutesResultMap">
+        SELECT * FROM Routes WHERE from_address_id = #{fromAddressId}
+    </select>
+
+    <select id="readAllByToAddressId" resultMap="RoutesResultMap">
+        SELECT * FROM Routes WHERE to_address_id = #{toAddressId}
+    </select>
+
+    <select id="readAllByDeliveryId" resultMap="RoutesResultMap">
+        SELECT * FROM Routes
+        WHERE id IN (
+        SELECT route_id FROM Delivery_routes
+        WHERE Delivery_routes.delivery_id = #{id}
+        )
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM Routes WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE Routes SET
+        from_address_id = #{fromAddress.id},
+        to_address_id = #{toAddress.id},
+        distance_km = #{distanceKm},
+        estimated_time_min = #{estimatedTimeMin},
+        last_updated = #{lastUpdated}
+        WHERE id = #{id}
+    </update>
+
+    <insert id="create">
+        INSERT INTO Routes (from_address_id, to_address_id, distance_km, estimated_time_min, last_updated)
+        VALUES (#{fromAddress.id}, #{toAddress.id}, #{distanceKm}, #{estimatedTimeMin}, #{lastUpdated})
+    </insert>
+</mapper>

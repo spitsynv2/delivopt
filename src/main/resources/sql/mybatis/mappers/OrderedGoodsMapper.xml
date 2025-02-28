@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.delivopt.repo.IOrderedGoodsDAO">
+    <resultMap id="OrderedWarehouseGoodsResultMap" type="com.solvd.delivopt.model.OrderedGoods">
+        <id property="warehouseId" column="warehouse_id"/>
+        <result property="quantity" column="quantity"/>
+
+        <association property="goods" javaType="com.solvd.delivopt.model.Goods"
+                     select="com.solvd.delivopt.repo.IGoodsDAO.readById" column="goods_id"/>
+    </resultMap>
+
+    <select id="readAllByOrderId" resultMap="OrderedWarehouseGoodsResultMap">
+        SELECT * FROM Ordered_Warehouse_Goods WHERE order_id = #{orderId}
+    </select>
+
+    <select id="readAllByWarehouseId" resultMap="OrderedWarehouseGoodsResultMap">
+        SELECT * FROM Ordered_Warehouse_Goods WHERE warehouse_id = #{warehouseId}
+    </select>
+
+    <select id="readAll" resultMap="OrderedWarehouseGoodsResultMap">
+        SELECT * FROM Ordered_Warehouse_Goods
+    </select>
+
+    <delete id="deleteByOrderAndGoodsId">
+        DELETE FROM Ordered_Warehouse_Goods WHERE order_id = #{orderId} AND goods_id = #{goodsId}
+    </delete>
+
+    <update id="update">
+        UPDATE Ordered_Warehouse_Goods SET
+        quantity = #{orderedGoods.quantity}
+        WHERE order_id = #{orderId}
+        AND warehouse_id = #{orderedGoods.warehouseId}
+        AND goods_id = #{orderedGoods.goods.id}
+    </update>
+
+    <insert id="create">
+        INSERT INTO Ordered_Warehouse_Goods (order_id, warehouse_id, goods_id, quantity)
+        VALUES (#{orderId}, #{orderedGoods.warehouseId}, #{orderedGoods.goods.id}, #{orderedGoods.quantity})
+    </insert>
+
+</mapper>
