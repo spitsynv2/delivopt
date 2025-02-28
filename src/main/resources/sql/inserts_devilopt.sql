@@ -53,7 +53,7 @@ INSERT INTO `Orders` (`client_id`, `destination_address_id`, `order_date`, `stat
 (6, 7, NOW(), 'PENDING'),
 (7, 7, NOW(), 'PENDING');
 
-INSERT INTO `Ordered_Warhouse_Goods` (`order_id`, `warehouse_id`, `goods_id`, `quantity`) VALUES
+INSERT INTO `Ordered_Warehouse_Goods` (`order_id`, `warehouse_id`, `goods_id`, `quantity`) VALUES
 (1, 1, 1, 1),
 (2, 1, 2, 2),
 (3, 1, 1, 1),

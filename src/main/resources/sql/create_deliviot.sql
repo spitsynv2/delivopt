@@ -157,11 +157,11 @@ CREATE TABLE IF NOT EXISTS `delivopt`.`Orders` (
 
 
 -- -----------------------------------------------------
--- Table `delivopt`.`Ordered_Warhouse_Goods`
+-- Table `delivopt`.`Ordered_Warehouse_Goods`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `delivopt`.`Ordered_Warhouse_Goods` ;
+DROP TABLE IF EXISTS `delivopt`.`Ordered_Warehouse_Goods` ;
 
-CREATE TABLE IF NOT EXISTS `delivopt`.`Ordered_Warhouse_Goods` (
+CREATE TABLE IF NOT EXISTS `delivopt`.`Ordered_Warehouse_Goods` (
   `order_id` BIGINT NOT NULL,
   `quantity` INT NOT NULL,
   `warehouse_id` BIGINT NOT NULL,

@@ -1,5 +1,10 @@
-<mapper namespace="com.deliveryservice.repo.IGoodsDAO">
-    <resultMap id="GoodsResultMap" type="com.deliveryservice.model.Goods">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.delivopt.repo.IGoodsDAO">
+    <resultMap id="GoodsResultMap" type="com.solvd.delivopt.model.Goods">
         <id property="id" column="id"/>
         <result property="goodsName" column="goods_name"/>
         <result property="description" column="description"/>
@@ -21,15 +26,40 @@
 
     <update id="update">
         UPDATE Goods SET
-        goods_name = #{goods.goodsName},
-        description = #{goods.description},
-        weight = #{goods.weight},
-        volume = #{goods.volume}
-        WHERE id = #{goods.id}
+        goods_name = #{goodsName},
+        description = #{description},
+        weight = #{weight},
+        volume = #{volume}
+        WHERE id = #{id}
     </update>
 
     <insert id="create">
         INSERT INTO Goods (goods_name, description, weight, volume)
-        VALUES (#{goods.goodsName}, #{goods.description}, #{goods.weight}, #{goods.volume})
+        VALUES (#{goodsName}, #{description}, #{weight}, #{volume})
+    </insert>
+
+    <select id="readAllByWarehouseId" resultMap="GoodsResultMap">
+        SELECT * FROM Goods
+        WHERE id IN (
+        SELECT goods_id FROM Warehouse_Goods
+        WHERE warehouse_id = #{warehouseId} AND quantity > 0
+        )
+    </select>
+
+    <delete id="deleteByWarehouseAndGoodsId">
+        DELETE FROM Warehouse_Goods
+        WHERE warehouse_id = #{warehouseId} AND goods_id = #{goodsId}
+    </delete>
+
+    <update id="updateByWarehouseAndGoodsId">
+        UPDATE Warehouse_Goods SET
+        quantity = #{quantity}
+        WHERE warehouse_id = #{warehouseId}
+        AND goods_id = #{goodsId}
+    </update>
+
+    <insert id="createByWarehouseAndGoodsId">
+        INSERT INTO Warehouse_Goods (warehouse_id, goods_id, quantity)
+        VALUES (#{warehouseId}, #{goodsId}, #{quantity})
     </insert>
 </mapper>
