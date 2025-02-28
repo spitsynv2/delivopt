@@ -1,7 +1,7 @@
 {
   "id" : 1,
-  "departureTime" : [ 2025, 2, 28, 16, 7, 52, 828936000 ],
-  "estimatedArrivalTime" : [ 2025, 2, 28, 18, 7, 52, 828936000 ],
+  "departureTime" : [ 2025, 2, 28, 16, 31, 28, 58137300 ],
+  "estimatedArrivalTime" : [ 2025, 2, 28, 18, 31, 28, 58137300 ],
   "type" : "WAREHOUSE_TO_CLIENT",
   "car" : {
     "id" : 1,
@@ -12,7 +12,7 @@
   },
   "orders" : [ {
     "id" : 1,
-    "orderDate" : [ 2025, 2, 28, 16, 7, 52, 828936000 ],
+    "orderDate" : [ 2025, 2, 28, 16, 31, 28, 58137300 ],
     "status" : "PENDING",
     "clientId" : 1,
     "destinationAddress" : {
@@ -38,7 +38,7 @@
     "totalVolume" : 10.0
   }, {
     "id" : 2,
-    "orderDate" : [ 2025, 2, 28, 16, 7, 52, 828936000 ],
+    "orderDate" : [ 2025, 2, 28, 16, 31, 28, 58137300 ],
     "status" : "PENDING",
     "clientId" : 2,
     "destinationAddress" : {
@@ -64,7 +64,7 @@
     "totalVolume" : 10.0
   }, {
     "id" : 3,
-    "orderDate" : [ 2025, 2, 28, 16, 7, 52, 828936000 ],
+    "orderDate" : [ 2025, 2, 28, 16, 31, 28, 58137300 ],
     "status" : "PENDING",
     "clientId" : 3,
     "destinationAddress" : {
@@ -109,7 +109,7 @@
     },
     "distanceKm" : 5.0,
     "estimatedTimeMin" : 30,
-    "lastUpdated" : [ 2025, 2, 28, 16, 7, 52, 828936000 ]
+    "lastUpdated" : [ 2025, 2, 28, 16, 31, 28, 58137300 ]
   }, {
     "id" : 1,
     "fromAddress" : {
@@ -130,7 +130,7 @@
     },
     "distanceKm" : 5.0,
     "estimatedTimeMin" : 30,
-    "lastUpdated" : [ 2025, 2, 28, 16, 7, 52, 828936000 ]
+    "lastUpdated" : [ 2025, 2, 28, 16, 31, 28, 58137300 ]
   }, {
     "id" : 1,
     "fromAddress" : {
@@ -151,6 +151,6 @@
     },
     "distanceKm" : 5.0,
     "estimatedTimeMin" : 30,
-    "lastUpdated" : [ 2025, 2, 28, 16, 7, 52, 828936000 ]
+    "lastUpdated" : [ 2025, 2, 28, 16, 31, 28, 58137300 ]
   } ]
 }
