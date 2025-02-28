@@ -96,39 +96,11 @@ public class Runner {
         //RouteMyBatisImpl routeMyBatis = new RouteMyBatisImpl();
         //routeMyBatis.readAll();
 
-
-
-
         Graph graph = new Graph();
 
         // Add nodes (addresses)
         Address warehouseAddress1 = new Address();
         Address clientAddress1 = new Address();
-
-        graph.addNode(1L, warehouseAddress1);
-        graph.addNode(2L, clientAddress1);
-
-        HarvesineDistance harvesineDistance = new HarvesineDistance();
-
-        double distance = harvesineDistance.calculateDistance(
-                warehouseAddress1.getLatitude(), warehouseAddress1.getLongitude(),
-                clientAddress1.getLatitude(), clientAddress1.getLongitude()
-        );
-        System.out.println("Distance between warehouse and client: " + distance + " km");
-
-        // Add edges (routes between warehouse and client)
-        graph.addEdge(1L, 2L, distance);
-
-        // Use Dijkstra to find shortest path from warehouse (1) to client (2)
-        Map<Long, Double> shortestPaths = Dijkstra.calculateShortestPath(graph, 1L);
-
-        System.out.println("Shortest path from Warehouse to Client: " + shortestPaths.get(2L) + " km");
-
-        // Use Dijkstra to find shortest path from client (2) to warehouse (1)
-        Map<Long, Double> reverseShortestPaths = Dijkstra.calculateShortestPath(graph, 2L);
-
-        System.out.println("Shortest path from Client to Warehouse: " + reverseShortestPaths.get(1L) + " km");
-
 
         warehouseAddress1.setId(1L);
         warehouseAddress1.setStreet("Mazowiecka 1");
@@ -182,6 +154,29 @@ public class Runner {
         client3.setPhoneNumber("+48 602 703 804");
         client3.setAddress(clientAddress3);
 
+        graph.addNode(1L, warehouseAddress1);
+        graph.addNode(2L, clientAddress1);
+
+        HarvesineDistance harvesineDistance = new HarvesineDistance();
+
+        double distance = harvesineDistance.calculateDistance(
+                warehouseAddress1.getLatitude(), warehouseAddress1.getLongitude(),
+                clientAddress1.getLatitude(), clientAddress1.getLongitude()
+        );
+        System.out.println("Distance between warehouse and client: " + distance + " km");
+
+        // Add edges (routes between warehouse and client)
+        graph.addEdge(1L, 2L, distance);
+
+        // Use Dijkstra to find shortest path from warehouse (1) to client (2)
+        Map<Long, Double> shortestPaths = Dijkstra.calculateShortestPath(graph, 1L);
+
+        System.out.println("Shortest path from Warehouse to Client: " + shortestPaths.get(2L) + " km");
+
+        // Use Dijkstra to find shortest path from client (2) to warehouse (1)
+        Map<Long, Double> reverseShortestPaths = Dijkstra.calculateShortestPath(graph, 2L);
+
+        System.out.println("Shortest path from Client to Warehouse: " + reverseShortestPaths.get(1L) + " km");
 
         Car car = new Car();
         car.setId(1L);
