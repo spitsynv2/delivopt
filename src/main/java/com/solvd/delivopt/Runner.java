@@ -52,5 +52,38 @@ public class Runner {
         //deliveryMyBatis.create(delivery);
         //deliveryMyBatis.readAllByOrderId(1L);
         //deliveryMyBatis.readAllByRouteId(1L);
+
+        //GoodsMyBatisImpl goodsMyBatis = new GoodsMyBatisImpl();
+        //goodsMyBatis.readAll();
+        //Goods goods = goodsMyBatis.readById(1L);
+        //goodsMyBatis.update(goods);
+        //goodsMyBatis.create(goods);
+        //goodsMyBatis.deleteById(11L);
+        //goodsMyBatis.readAllByWarehouseId(1L);
+        //goodsMyBatis.createByWarehouseAndGoodsId(1L,4L,3);
+
+        //WarehouseMyBatisImpl warehouseMyBatis = new WarehouseMyBatisImpl();
+        //warehouseMyBatis.readAll();
+        //warehouseMyBatis.readById(1L);
+        //warehouseMyBatis.readAllByGoodsId(1L);
+        //warehouseMyBatis.update(warehouseMyBatis.readById(1L));
+        //warehouseMyBatis.create(warehouseMyBatis.readById(1L));
+
+        //OrderedGoodsMyBatisImpl orderedGoodsMyBatis = new OrderedGoodsMyBatisImpl();
+        //orderedGoodsMyBatis.readAll();
+        //OrderedGoods orderedGoods =  orderedGoodsMyBatis.readAllByOrderId(1L).getFirst();
+        //orderedGoods.setQuantity(5);
+        //orderedGoodsMyBatis.update(7L,orderedGoods);
+
+        //OrderMyBatisImpl orderMyBatis = new OrderMyBatisImpl();
+        //orderMyBatis.readAll();
+        //orderMyBatis.readAllByClientId(1L);
+        //orderMyBatis.readAllByDeliveryId(1L);
+        //orderMyBatis.create(orderMyBatis.readById(2L));
+        //orderMyBatis.update(orderMyBatis.readById(2L));
+        //orderMyBatis.deleteById(1L);
+
+        //RouteMyBatisImpl routeMyBatis = new RouteMyBatisImpl();
+        //routeMyBatis.readAll();
     }
 }

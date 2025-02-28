@@ -1,7 +1,11 @@
-<mapper namespace="com.deliveryservice.repo.IWarehouseDAO">
-    <resultMap id="WarehouseResultMap" type="com.deliveryservice.model.Warehouse">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.delivopt.repo.IWarehouseDAO">
+    <resultMap id="WarehouseResultMap" type="com.solvd.delivopt.model.Warehouse">
         <id property="id" column="id"/>
-        <result property="warehouseAddressId" column="warehouse_address_id"/>
         <result property="warehouseName" column="warehouse_name"/>
         <result property="ownerCompanyId" column="owner_company_id"/>
     </resultMap>
@@ -24,14 +28,22 @@
 
     <update id="update">
         UPDATE Warehouse SET
-        warehouse_address_id = #{warehouse.warehouseAddressId},
-        warehouse_name = #{warehouse.warehouseName},
-        owner_company_id = #{warehouse.ownerCompanyId}
-        WHERE id = #{warehouse.id}
+        warehouse_address_id = #{warehouseAddress.id},
+        warehouse_name = #{warehouseName},
+        owner_company_id = #{ownerCompanyId}
+        WHERE id = #{id}
     </update>
 
     <insert id="create">
         INSERT INTO Warehouse (warehouse_address_id, warehouse_name, owner_company_id)
-        VALUES (#{warehouse.warehouseAddressId}, #{warehouse.warehouseName}, #{warehouse.ownerCompanyId})
+        VALUES (#{warehouseAddress.id}, #{warehouseName}, #{ownerCompanyId})
     </insert>
+
+    <select id="readAllByGoodsId" resultMap="WarehouseResultMap">
+        SELECT * FROM Warehouse
+        WHERE id IN (
+        SELECT warehouse_id FROM Warehouse_Goods
+        WHERE goods_id = #{goodsId} AND quantity > 0
+        )
+    </select>
 </mapper>
