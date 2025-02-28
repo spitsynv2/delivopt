@@ -1,9 +1,14 @@
-<mapper namespace="com.deliveryservice.repo.IAddressDAO">
-    <resultMap id="AddressResultMap" type="com.deliveryservice.model.Address">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.delivopt.repo.IAddressDAO">
+    <resultMap id="AddressResultMap" type="com.solvd.delivopt.model.Address">
         <id property="id" column="id"/>
         <result property="street" column="street"/>
         <result property="city" column="city"/>
-        <result property="postcode" column="postcode"/>
+        <result property="postCode" column="postcode"/>
         <result property="latitude" column="latitude"/>
         <result property="longitude" column="longitude"/>
     </resultMap>
@@ -16,22 +21,46 @@
         SELECT * FROM Address
     </select>
 
+    <select id="readByClientId" resultMap="AddressResultMap">
+        SELECT * FROM Address
+        WHERE id = (
+            SELECT address_id FROM Client
+            WHERE Client.id = #{id}
+        )
+    </select>
+
+    <select id="readByWarehouseId" resultMap="AddressResultMap">
+        SELECT * FROM Address
+        WHERE id = (
+            SELECT warehouse_address_id FROM Warehouse
+            WHERE Warehouse.id = #{id}
+        )
+    </select>
+
+    <select id="readByCompanyId" resultMap="AddressResultMap">
+        SELECT * FROM Address
+        WHERE id = (
+            SELECT address_id FROM Company
+            WHERE Company.id = #{id}
+        )
+    </select>
+
     <delete id="deleteById">
         DELETE FROM Address WHERE id = #{id}
     </delete>
 
     <update id="update">
         UPDATE Address SET
-        street = #{address.street},
-        city = #{address.city},
-        postcode = #{address.postCode},
-        latitude = #{address.latitude},
-        longitude = #{address.longitude}
-        WHERE id = #{address.id}
+        street = #{street},
+        city = #{city},
+        postcode = #{postCode},
+        latitude = #{latitude},
+        longitude = #{longitude}
+        WHERE id = #{id}
     </update>
 
     <insert id="create">
         INSERT INTO Address (street, city, postcode, latitude, longitude)
-        VALUES (#{address.street}, #{address.city}, #{address.postcode}, #{address.latitude}, #{address.longitude})
+        VALUES (#{street}, #{city}, #{postCode}, #{latitude}, #{longitude})
     </insert>
 </mapper>

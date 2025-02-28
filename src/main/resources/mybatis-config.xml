@@ -7,7 +7,7 @@
     <properties resource="config.properties" />
 
     <typeAliases>
-        <package name="com.solvd.model" />
+        <package name="com.solvd.delivopt.model" />
     </typeAliases>
 
     <environments default="dev">
@@ -23,6 +23,15 @@
     </environments>
 
     <mappers>
-
+        <mapper resource="sql/mybatis/mappers/AddressMapper.xml" />
+        <mapper resource="sql/mybatis/mappers/CarMapper.xml" />
+        <mapper resource="sql/mybatis/mappers/ClientMapper.xml" />
+        <mapper resource="sql/mybatis/mappers/CompanyMapper.xml" />
+        <mapper resource="sql/mybatis/mappers/DeliveryMapper.xml" />
+        <mapper resource="sql/mybatis/mappers/GoodsMapper.xml" />
+        <mapper resource="sql/mybatis/mappers/WarehouseMapper.xml" />
+        <mapper resource="sql/mybatis/mappers/OrderedGoodsMapper.xml" />
+        <mapper resource="sql/mybatis/mappers/OrderMapper.xml" />
+        <mapper resource="sql/mybatis/mappers/RouteMapper.xml" />
     </mappers>
 </configuration>

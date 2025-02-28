@@ -1,5 +1,10 @@
-<mapper namespace="com.deliveryservice.repo.ICarDAO">
-    <resultMap id="CarResultMap" type="com.deliveryservice.model.Car">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.delivopt.repo.ICarDAO">
+    <resultMap id="CarResultMap" type="com.solvd.delivopt.model.Car">
         <id property="id" column="id"/>
         <result property="carType" column="car_type"/>
         <result property="maxWeightCapacity" column="max_weight_capacity"/>
@@ -15,21 +20,34 @@
         SELECT * FROM Car
     </select>
 
+    <select id="readByDeliveryId" resultMap="CarResultMap">
+        SELECT * FROM Car
+        WHERE id = (
+            SELECT car_id FROM Delivery
+            WHERE Delivery.id = #{id}
+        )
+    </select>
+
+    <select id="readAllByCompanyId" resultMap="CarResultMap">
+        SELECT * FROM Car
+        WHERE owner_company_id = #{id}
+    </select>
+
     <delete id="deleteById">
         DELETE FROM Car WHERE id = #{id}
     </delete>
 
     <update id="update">
         UPDATE Car SET
-        car_type = #{car.carType},
-        max_weight_capacity = #{car.maxWeightCapacity},
-        max_volume_capacity = #{car.maxVolumeCapacity},
-        owner_company_id = #{car.ownerCompanyId}
-        WHERE id = #{car.id}
+        car_type = #{carType},
+        max_weight_capacity = #{maxWeightCapacity},
+        max_volume_capacity = #{maxVolumeCapacity},
+        owner_company_id = #{ownerCompanyId}
+        WHERE id = #{id}
     </update>
 
     <insert id="create">
         INSERT INTO Car (car_type, max_weight_capacity, max_volume_capacity, owner_company_id)
-        VALUES (#{car.carType}, #{car.maxWeightCapacity}, #{car.maxVolumeCapacity}, #{car.ownerCompanyId})
+        VALUES (#{carType}, #{maxWeightCapacity}, #{maxVolumeCapacity}, #{ownerCompanyId})
     </insert>
 </mapper>
