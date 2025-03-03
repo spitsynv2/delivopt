@@ -190,8 +190,8 @@ public class Runner {
         );
 
         double distance3_2 = HarvesineDistance.calculateDistance(
-                graph.getNode(1L).getAddress().getLatitude(),
-                graph.getNode(1L).getAddress().getLongitude(),
+                graph.getNode(3L).getAddress().getLatitude(),
+                graph.getNode(3L).getAddress().getLongitude(),
                 graph.getNode(2L).getAddress().getLatitude(),
                 graph.getNode(2L).getAddress().getLongitude()
         );
