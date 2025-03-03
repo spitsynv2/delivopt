@@ -1,16 +1,27 @@
 package com.solvd.delivopt;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.solvd.delivopt.model.*;
+import com.solvd.delivopt.model.enums.DeliveryType;
+import com.solvd.delivopt.model.enums.OrderStatus;
 import com.solvd.delivopt.repo.impl.mybatis.*;
+import com.solvd.delivopt.util.DeliveryMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
 
 public class Runner {
     private static final Logger log = LogManager.getLogger(Runner.class);
 
-    public static void main(String[] args ) {
+    public static void main(String[] args ) throws Exception{
         //AddressMyBatisImpl addressMyBatis = new AddressMyBatisImpl();
         //List<Address> addresses = addressMyBatis.readAll();
         //Address address = addressMyBatis.readById(1L);
@@ -85,5 +96,155 @@ public class Runner {
 
         //RouteMyBatisImpl routeMyBatis = new RouteMyBatisImpl();
         //routeMyBatis.readAll();
+
+
+        Address warehouseAddress1 = new Address();
+        warehouseAddress1.setId(1L);
+        warehouseAddress1.setStreet("Mazowiecka 1");
+        warehouseAddress1.setCity("Warsaw");
+        warehouseAddress1.setPostCode("00-001");
+        warehouseAddress1.setLatitude(52.2298);
+        warehouseAddress1.setLongitude(21.0122);
+
+        Address clientAddress1 = new Address();
+        clientAddress1.setId(2L);
+        clientAddress1.setStreet("Pilsudskiego 15");
+        clientAddress1.setCity("Warsaw");
+        clientAddress1.setPostCode("00-010");
+        clientAddress1.setLatitude(52.2200);
+        clientAddress1.setLongitude(21.0050);
+
+        Address clientAddress2 = new Address();
+        clientAddress2.setId(3L);
+        clientAddress2.setStreet("Pulawska 30");
+        clientAddress2.setCity("Warsaw");
+        clientAddress2.setPostCode("00-020");
+        clientAddress2.setLatitude(52.2100);
+        clientAddress2.setLongitude(21.0005);
+
+        Address clientAddress3 = new Address();
+        clientAddress3.setId(4L);
+        clientAddress3.setStreet("Saska 45");
+        clientAddress3.setCity("Warsaw");
+        clientAddress3.setPostCode("00-030");
+        clientAddress3.setLatitude(52.2000);
+        clientAddress3.setLongitude(20.9950);
+
+        // Create Clients based on SQL data
+        Client client1 = new Client();
+        client1.setId(1L);
+        client1.setClientName("Jan Kowalski");
+        client1.setEmail("jan.kowalski@example.com");
+        client1.setPhoneNumber("+48 600 700 800");
+        client1.setAddress(clientAddress1);
+
+        Client client2 = new Client();
+        client2.setId(2L);
+        client2.setClientName("Anna Nowak");
+        client2.setEmail("anna.nowak@example.com");
+        client2.setPhoneNumber("+48 601 702 803");
+        client2.setAddress(clientAddress2);
+
+        Client client3 = new Client();
+        client3.setId(3L);
+        client3.setClientName("Piotr Zielinski");
+        client3.setEmail("piotr.zielinski@example.com");
+        client3.setPhoneNumber("+48 602 703 804");
+        client3.setAddress(clientAddress3);
+
+        // Create a Car for the delivery
+        Car car = new Car();
+        car.setId(1L);
+        car.setCarType("Truck");
+        car.setMaxWeightCapacity(2000.0);
+        car.setMaxVolumeCapacity(15.0);
+        car.setOwnerCompanyId(1L);  // Example company ID
+
+        // Create Orders for the delivery
+        Order order1 = createOrder(client1, clientAddress1, 1L);
+        Order order2 = createOrder(client2, clientAddress2, 2L);
+        Order order3 = createOrder(client3, clientAddress3, 3L);
+
+        // Create Routes for the delivery
+        Route route1 = createRoute(warehouseAddress1, clientAddress1);
+        Route route2 = createRoute(warehouseAddress1, clientAddress2);
+        Route route3 = createRoute(warehouseAddress1, clientAddress3);
+
+        // Create Delivery for the delivery
+        Delivery delivery = new Delivery();
+        delivery.setId(1L);
+        delivery.setDepartureTime(LocalDateTime.now());
+        delivery.setEstimatedArrivalTime(LocalDateTime.now().plusHours(2));
+        delivery.setType(DeliveryType.WAREHOUSE_TO_CLIENT);
+        delivery.setCar(car);
+        delivery.setOrders(Arrays.asList(order1, order2, order3));
+        delivery.setRoutes(Arrays.asList(route1, route2, route3));
+
+        // Set total weight and total volume for the orders
+        setTotalWeightAndVolume(order1);
+        setTotalWeightAndVolume(order2);
+        setTotalWeightAndVolume(order3);
+
+        System.out.println(delivery);
+
+        // Serialize to JSON
+        String json = DeliveryMapper.toJson(delivery);
+        System.out.println("Serialized JSON: " + json);
+
+        // Deserialize from JSON
+        Delivery deserializedDelivery = DeliveryMapper.fromJson(json);
+        System.out.println("Deserialized Delivery: " + deserializedDelivery);
+
+        try {
+            DeliveryMapper.writeJsonToFile(deserializedDelivery, "output_delivery.json");
+        } catch (IOException e) {
+            System.err.println("Error writing JSON to file: " + e.getMessage());
+        }
+
+    }
+
+    private static Order createOrder(Client client, Address destinationAddress, Long orderId) {
+        Order order = new Order();
+        order.setId(orderId);
+        order.setOrderDate(LocalDateTime.now());
+        order.setStatus(OrderStatus.PENDING);
+        order.setClientId(client.getId());
+        order.setDestinationAddress(destinationAddress);
+
+        // Create Goods for the ordered goods
+        Goods goods = new Goods();
+        goods.setId(1L);
+        goods.setGoodsName("Electronics");
+        goods.setDescription("Various electronic items");
+        goods.setWeight(10.0);
+        goods.setVolume(5.0);
+
+        OrderedGoods orderedGoods = new OrderedGoods();
+        orderedGoods.setWarehouseId(1L);
+        orderedGoods.setGoods(goods);
+        orderedGoods.setQuantity(2);
+
+        order.setOrderedGoods(Arrays.asList(orderedGoods));
+        return order;
+    }
+
+    // Helper method to create routes
+    private static Route createRoute(Address fromAddress, Address toAddress) {
+        Route route = new Route();
+        route.setId(1L);
+        route.setFromAddress(fromAddress);
+        route.setToAddress(toAddress);
+        route.setDistanceKm(5.0);
+        route.setEstimatedTimeMin(30);
+        route.setLastUpdated(LocalDateTime.now());
+        return route;
+    }
+
+    // Helper method to set total weight and volume
+    private static void setTotalWeightAndVolume(Order order) {
+        double totalWeight = order.getTotalWeight();
+        double totalVolume = order.getTotalVolume();
+        order.setTotalWeight(totalWeight);
+        order.setTotalVolume(totalVolume);
     }
 }
