@@ -1,6 +1,9 @@
-package com.solvd.delivopt.util;
+package com.solvd.delivopt.util.pathfinder;
 
-import com.solvd.delivopt.util.Graph;
+import com.solvd.delivopt.util.pathfinder.graphmodel.Edge;
+import com.solvd.delivopt.util.pathfinder.graphmodel.Graph;
+import com.solvd.delivopt.util.pathfinder.graphmodel.Node;
+import com.solvd.delivopt.util.pathfinder.graphmodel.NodeDistancePair;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -10,11 +13,10 @@ import java.util.PriorityQueue;
 public class Dijkstra {
     public static Map<Long, Double> calculateShortestPath(Graph graph, Long startId) {
         Map<Long, Double> distances = new HashMap<>();
-        Map<Long, Graph.Node> previousNodes = new HashMap<>();
+        Map<Long, Node> previousNodes = new HashMap<>();
         PriorityQueue<NodeDistancePair> queue = new PriorityQueue<>(Comparator.comparingDouble(NodeDistancePair::getDistance));
 
-        // Initialize distances
-        for (Graph.Node node : graph.getNodes()) {
+        for (Node node : graph.getNodes()) {
             distances.put(node.getId(), Double.MAX_VALUE);
         }
         distances.put(startId, 0.0);
@@ -26,12 +28,11 @@ public class Dijkstra {
             Long currentNodeId = current.getNodeId();
             Double currentDistance = current.getDistance();
 
-            // Skip processing if we have already found a shorter path
             if (currentDistance > distances.get(currentNodeId)) continue;
 
-            Graph.Node currentNode = graph.getNode(currentNodeId);
+            Node currentNode = graph.getNode(currentNodeId);
 
-            for (Graph.Edge edge : currentNode.getEdges()) {
+            for (Edge edge : currentNode.getEdges()) {
                 Long neighborId = edge.getDestination().getId();
                 Double newDist = currentDistance + edge.getDistance();
                 if (newDist < distances.get(neighborId)) {
@@ -42,23 +43,5 @@ public class Dijkstra {
             }
         }
         return distances;
-    }
-
-    private static class NodeDistancePair {
-        private final Long nodeId;
-        private final Double distance;
-
-        public NodeDistancePair(Long nodeId, Double distance) {
-            this.nodeId = nodeId;
-            this.distance = distance;
-        }
-
-        public Long getNodeId() {
-            return nodeId;
-        }
-
-        public Double getDistance() {
-            return distance;
-        }
     }
 }

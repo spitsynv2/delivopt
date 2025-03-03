@@ -12,6 +12,15 @@ public class Address {
     private Double latitude;
     private Double longitude;
 
+    public Address(Long id, String street, String city, String postCode, Double latitude, Double longitude) {
+        this.id = id;
+        this.street = street;
+        this.city = city;
+        this.postCode = postCode;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public Address() {}
 
     public Long getId() {
