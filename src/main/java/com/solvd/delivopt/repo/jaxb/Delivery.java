@@ -1,20 +1,26 @@
 package com.solvd.delivopt.repo.jaxb;
 
+import com.solvd.delivopt.model.Car;
+import com.solvd.delivopt.model.Order;
+import com.solvd.delivopt.model.Route;
 
+import com.solvd.delivopt.model.enums.DeliveryType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 @XmlRootElement(name = "Delivery")
 public class Delivery {
-
     private Long id;
-    private String departureTime;
-    private String estimatedArrivalTime;
-    private String type;
-    private List<OrdersDelivery> ordersDeliveries;
-    private List<DeliveryRoute> deliveryRoutes;
+    private LocalDateTime departureTime;
+    private LocalDateTime estimatedArrivalTime;
+    private DeliveryType type;
+    private Car car;
+    private List<Order> orders;
+    private List<Route> routes;
+
+    public Delivery() {}
 
     @XmlElement
     public Long getId() {
@@ -26,48 +32,56 @@ public class Delivery {
     }
 
     @XmlElement
-    public String getDepartureTime() {
+    public LocalDateTime getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(String departureTime) {
+    public void setDepartureTime(LocalDateTime departureTime) {
         this.departureTime = departureTime;
     }
 
     @XmlElement
-    public String getEstimatedArrivalTime() {
+    public LocalDateTime getEstimatedArrivalTime() {
         return estimatedArrivalTime;
     }
 
-    public void setEstimatedArrivalTime(String estimatedArrivalTime) {
+    public void setEstimatedArrivalTime(LocalDateTime estimatedArrivalTime) {
         this.estimatedArrivalTime = estimatedArrivalTime;
     }
 
     @XmlElement
-    public String getType() {
+    public DeliveryType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(DeliveryType type) {
         this.type = type;
     }
 
-    @XmlElement(name = "OrdersDelivery")
-    public List<OrdersDelivery> getOrdersDeliveries() {
-        return ordersDeliveries;
+    @XmlElement
+    public Car getCar() {
+        return car;
     }
 
-    public void setOrdersDeliveries(List<OrdersDelivery> ordersDeliveries) {
-        this.ordersDeliveries = ordersDeliveries;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
-    @XmlElement(name = "DeliveryRoute")
-    public List<DeliveryRoute> getDeliveryRoutes() {
-        return deliveryRoutes;
+    @XmlElement(name = "Order")
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setDeliveryRoutes(List<DeliveryRoute> deliveryRoutes) {
-        this.deliveryRoutes = deliveryRoutes;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    @XmlElement(name = "Route")
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
     }
 }
-
