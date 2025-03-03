@@ -112,6 +112,13 @@ public class Order {
         return ordersVolume;
     }
 
+    public void setTotalWeightAndVolume() {
+        double totalWeight = this.getTotalWeight();
+        double totalVolume = this.getTotalVolume();
+        this.setTotalWeight(totalWeight);
+        this.setTotalVolume(totalVolume);
+    }
+
     @Override
     public String toString() {
         return "Order{" +

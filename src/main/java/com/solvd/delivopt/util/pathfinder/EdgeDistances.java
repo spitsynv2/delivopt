@@ -1,9 +1,9 @@
-package com.solvd.delivopt.util;
+package com.solvd.delivopt.util.pathfinder;
 
 public class EdgeDistances {
-    private  Long fromNodeId;
-    private  Long toNodeId;
-    private  double distance;
+    private Long fromNodeId;
+    private Long toNodeId;
+    private double distance;
 
     public EdgeDistances(Long fromNodeId, Long toNodeId, double distance) {
         this.fromNodeId = fromNodeId;
