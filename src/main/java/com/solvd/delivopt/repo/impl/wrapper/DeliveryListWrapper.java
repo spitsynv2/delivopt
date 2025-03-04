@@ -4,6 +4,7 @@ import com.solvd.delivopt.model.Delivery;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "deliveries")
 public class DeliveryListWrapper {
 
     @XmlElement(name = "delivery")

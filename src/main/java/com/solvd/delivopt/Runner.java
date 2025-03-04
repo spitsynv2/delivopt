@@ -1,6 +1,7 @@
 package com.solvd.delivopt;
 
 import com.solvd.delivopt.model.*;
+import com.solvd.delivopt.repo.impl.jaxb.JaxbDeliveryImpl;
 import com.solvd.delivopt.repo.impl.mybatis.DeliveryMyBatisImpl;
 import com.solvd.delivopt.repo.impl.jackson.JacksonDeliveryImpl;
 import com.solvd.delivopt.util.pathfinder.NearestNeighborWithDijkstra;
@@ -15,18 +16,18 @@ public class Runner {
     private static final Logger log = LogManager.getLogger(Runner.class);
 
     public static void main(String[] args) {
-        //notAllNodesConnectedSimulation();
-        //allNodesConnectedSimulation();
-        //DeliveryMyBatisImpl deliveryMyBatis = new DeliveryMyBatisImpl();
-        //List<Delivery> deliveries = deliveryMyBatis.readAll();
+        notAllNodesConnectedSimulation();
+        allNodesConnectedSimulation();
+        DeliveryMyBatisImpl deliveryMyBatis = new DeliveryMyBatisImpl();
+        List<Delivery> deliveries = deliveryMyBatis.readAll();
 
-        //JaxbDeliveryImpl jaxbDelivery = new JaxbDeliveryImpl();
-        //log.info(jaxbDelivery.marshalDeliveries(deliveries));
-        //log.info(jaxbDelivery.unmarshalDeliveries());
-        //JacksonDeliveryImpl jacksonDelivery = new JacksonDeliveryImpl();
+        JaxbDeliveryImpl jaxbDelivery = new JaxbDeliveryImpl();
+        log.info(jaxbDelivery.marshalDeliveries(deliveries));
+        log.info(jaxbDelivery.unmarshalDeliveries());
+        JacksonDeliveryImpl jacksonDelivery = new JacksonDeliveryImpl();
 
-        //jacksonDelivery.writeListToJsonFile(deliveries);
-        //System.out.println(jacksonDelivery.listFromJsonFile());
+        jacksonDelivery.writeListToJsonFile(deliveries);
+        log.info(jacksonDelivery.listFromJsonFile());
     }
     
     public static void notAllNodesConnectedSimulation(){
