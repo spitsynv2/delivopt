@@ -9,6 +9,15 @@
         <result property="departureTime" column="departure_time"/>
         <result property="estimatedArrivalTime" column="estimated_arrival_time"/>
         <result property="type" column="type"/>
+
+        <association property="car" javaType="com.solvd.delivopt.model.Car"
+                     select="com.solvd.delivopt.repo.ICarDAO.readByDeliveryId" column="id"/>
+
+        <collection property="orders" ofType="com.solvd.delivopt.model.Order"
+                    select="com.solvd.delivopt.repo.IOrderDAO.readAllByDeliveryId" column="id"/>
+
+        <collection property="routes" ofType="com.solvd.delivopt.model.Route"
+                    select="com.solvd.delivopt.repo.IRouteDAO.readAllByDeliveryId" column="id"/>
     </resultMap>
 
     <select id="readById" resultMap="DeliveryResultMap">

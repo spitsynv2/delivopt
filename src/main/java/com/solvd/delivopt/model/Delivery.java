@@ -1,6 +1,12 @@
 package com.solvd.delivopt.model;
 
 import com.solvd.delivopt.model.enums.DeliveryType;
+import com.solvd.delivopt.util.LocalDateTimeAdapter;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,13 +15,32 @@ import java.util.List;
  * @author Vadym Spitsyn
  * @created 2025-02-26
  */
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Delivery {
+
+    @XmlElement
     private Long id;
+
+    @XmlElement
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime departureTime;
+
+    @XmlElement
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime estimatedArrivalTime;
+
+    @XmlElement
     private DeliveryType type;
+
+    @XmlElement
     private Car car;
+
+    @XmlElement
     private List<Order> orders;
+
+    @XmlElement
     private List<Route> routes;
 
     public Delivery() {}
