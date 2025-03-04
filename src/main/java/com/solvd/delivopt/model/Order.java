@@ -1,6 +1,12 @@
 package com.solvd.delivopt.model;
 
 import com.solvd.delivopt.model.enums.OrderStatus;
+import com.solvd.delivopt.util.LocalDateTimeAdapter;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,15 +15,34 @@ import java.util.List;
  * @author Vadym Spitsyn
  * @created 2025-02-26
  */
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Order {
+
+    @XmlElement
     private Long id;
+
+    @XmlElement
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime orderDate;
+
+    @XmlElement
     private OrderStatus status;
+
+    @XmlElement
     private Long clientId;
+
+    @XmlElement
     private Address destinationAddress;
-    //LIMITATION --> all orderedGoods must be from same warehouse.
-    private List<OrderedGoods> orderedGoods;
+
+    @XmlElement
+    private List<OrderedGoods> orderedGoods;  //LIMITATION --> all orderedGoods must be from same warehouse.
+
+    @XmlElement
     private Double totalWeight;
+
+    @XmlElement
     private Double totalVolume;
 
     public Order() {}

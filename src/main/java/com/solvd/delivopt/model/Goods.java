@@ -1,14 +1,32 @@
 package com.solvd.delivopt.model;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author Vadym Spitsyn
  * @created 2025-02-26
  */
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Goods {
+
+    @XmlElement
     private Long id;
+
+    @XmlElement
     private String goodsName;
+
+    @XmlElement
     private String description;
+
+    @XmlElement
     private Double weight;
+
+    @XmlElement
     private Double volume;
 
     public Goods() {}
