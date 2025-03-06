@@ -175,6 +175,21 @@ public class Runner {
 
         addEdgeWithDistance(graph, 3L, 4L); //  Client 2 -> Client 3
 
+
+        double distance1_2 = HarvesineDistance.calculateDistance(
+                graph.getNode(1L).getAddress().getLatitude(),
+                graph.getNode(1L).getAddress().getLongitude(),
+                graph.getNode(2L).getAddress().getLatitude(),
+                graph.getNode(2L).getAddress().getLongitude()
+        );
+
+        double distance1_3 = HarvesineDistance.calculateDistance(
+                graph.getNode(1L).getAddress().getLatitude(),
+                graph.getNode(1L).getAddress().getLongitude(),
+                graph.getNode(3L).getAddress().getLatitude(),
+                graph.getNode(3L).getAddress().getLongitude()
+        );
+
         double distance1_4 = HarvesineDistance.calculateDistance(
                 graph.getNode(1L).getAddress().getLatitude(),
                 graph.getNode(1L).getAddress().getLongitude(),
@@ -197,6 +212,8 @@ public class Runner {
         );
 
         log.info("Optimal Delivery Route allNodesConnectedSimulation: {}", NearestNeighborWithDijkstra.findOptimalRoute(graph, 1L));
+        log.info(distance1_2);
+        log.info(distance1_3);
         log.info(distance1_4);
         log.info(distance4_3);
         log.info(distance3_2);
