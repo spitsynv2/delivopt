@@ -1,0 +1,300 @@
+{
+  "deliveries" : [ {
+    "id" : 1,
+    "departureTime" : "2025-02-28T11:24:47",
+    "estimatedArrivalTime" : "2025-02-28T14:24:47",
+    "type" : "WAREHOUSE_TO_WAREHOUSE",
+    "car" : {
+      "id" : 1,
+      "carType" : "Van",
+      "maxWeightCapacity" : 500.0,
+      "maxVolumeCapacity" : 5.0,
+      "ownerCompanyId" : 1
+    },
+    "orders" : [ {
+      "id" : 6,
+      "orderDate" : "2025-02-28T11:24:47",
+      "status" : "PENDING",
+      "clientId" : 6,
+      "destinationAddress" : {
+        "id" : 7,
+        "street" : "Zakopianska 22",
+        "city" : "Krakow",
+        "postCode" : "30-003",
+        "latitude" : 50.05,
+        "longitude" : 19.93
+      },
+      "orderedGoods" : [ {
+        "warehouseId" : 1,
+        "goods" : {
+          "id" : 3,
+          "goodsName" : "Tablet",
+          "description" : "10-inch tablet",
+          "weight" : 0.5,
+          "volume" : 0.01
+        },
+        "quantity" : 1
+      } ],
+      "totalWeight" : 0.5,
+      "totalVolume" : 0.01
+    }, {
+      "id" : 7,
+      "orderDate" : "2025-02-28T11:24:47",
+      "status" : "PENDING",
+      "clientId" : 7,
+      "destinationAddress" : {
+        "id" : 7,
+        "street" : "Zakopianska 22",
+        "city" : "Krakow",
+        "postCode" : "30-003",
+        "latitude" : 50.05,
+        "longitude" : 19.93
+      },
+      "orderedGoods" : [ {
+        "warehouseId" : 1,
+        "goods" : {
+          "id" : 3,
+          "goodsName" : "Tablet",
+          "description" : "10-inch tablet",
+          "weight" : 0.5,
+          "volume" : 0.01
+        },
+        "quantity" : 2
+      } ],
+      "totalWeight" : 1.0,
+      "totalVolume" : 0.02
+    } ],
+    "routes" : [ {
+      "id" : 1,
+      "fromAddress" : {
+        "id" : 1,
+        "street" : "Mazowiecka 1",
+        "city" : "Warsaw",
+        "postCode" : "00-001",
+        "latitude" : 52.2298,
+        "longitude" : 21.0122
+      },
+      "toAddress" : {
+        "id" : 6,
+        "street" : "Karmelicka 18",
+        "city" : "Krakow",
+        "postCode" : "30-002",
+        "latitude" : 50.0651,
+        "longitude" : 19.944
+      },
+      "distanceKm" : 300.0,
+      "estimatedTimeMin" : 180,
+      "lastUpdated" : "2025-02-28T11:24:47"
+    } ]
+  }, {
+    "id" : 2,
+    "departureTime" : "2025-02-28T11:24:47",
+    "estimatedArrivalTime" : "2025-02-28T11:54:47",
+    "type" : "WAREHOUSE_TO_CLIENT",
+    "car" : {
+      "id" : 2,
+      "carType" : "Van",
+      "maxWeightCapacity" : 500.0,
+      "maxVolumeCapacity" : 5.0,
+      "ownerCompanyId" : 1
+    },
+    "orders" : [ {
+      "id" : 1,
+      "orderDate" : "2025-02-28T11:24:47",
+      "status" : "PENDING",
+      "clientId" : 1,
+      "destinationAddress" : {
+        "id" : 2,
+        "street" : "Pilsudskiego 15",
+        "city" : "Warsaw",
+        "postCode" : "00-010",
+        "latitude" : 52.22,
+        "longitude" : 21.005
+      },
+      "orderedGoods" : [ {
+        "warehouseId" : 1,
+        "goods" : {
+          "id" : 1,
+          "goodsName" : "Laptop",
+          "description" : "High-end laptop",
+          "weight" : 2.5,
+          "volume" : 0.01
+        },
+        "quantity" : 1
+      } ],
+      "totalWeight" : 2.5,
+      "totalVolume" : 0.01
+    }, {
+      "id" : 2,
+      "orderDate" : "2025-02-28T11:24:47",
+      "status" : "PENDING",
+      "clientId" : 2,
+      "destinationAddress" : {
+        "id" : 3,
+        "street" : "Pulawska 30",
+        "city" : "Warsaw",
+        "postCode" : "00-020",
+        "latitude" : 52.21,
+        "longitude" : 21.0005
+      },
+      "orderedGoods" : [ {
+        "warehouseId" : 1,
+        "goods" : {
+          "id" : 2,
+          "goodsName" : "Smartphone",
+          "description" : "Latest model smartphone",
+          "weight" : 0.5,
+          "volume" : 0.0
+        },
+        "quantity" : 2
+      } ],
+      "totalWeight" : 1.0,
+      "totalVolume" : 0.0
+    }, {
+      "id" : 3,
+      "orderDate" : "2025-02-28T11:24:47",
+      "status" : "PENDING",
+      "clientId" : 3,
+      "destinationAddress" : {
+        "id" : 4,
+        "street" : "Saska 45",
+        "city" : "Warsaw",
+        "postCode" : "00-030",
+        "latitude" : 52.2,
+        "longitude" : 20.995
+      },
+      "orderedGoods" : [ {
+        "warehouseId" : 1,
+        "goods" : {
+          "id" : 1,
+          "goodsName" : "Laptop",
+          "description" : "High-end laptop",
+          "weight" : 2.5,
+          "volume" : 0.01
+        },
+        "quantity" : 1
+      } ],
+      "totalWeight" : 2.5,
+      "totalVolume" : 0.01
+    }, {
+      "id" : 4,
+      "orderDate" : "2025-02-28T11:24:47",
+      "status" : "PENDING",
+      "clientId" : 4,
+      "destinationAddress" : {
+        "id" : 5,
+        "street" : "Wilanowska 60",
+        "city" : "Warsaw",
+        "postCode" : "00-040",
+        "latitude" : 52.19,
+        "longitude" : 20.99
+      },
+      "orderedGoods" : [ {
+        "warehouseId" : 1,
+        "goods" : {
+          "id" : 2,
+          "goodsName" : "Smartphone",
+          "description" : "Latest model smartphone",
+          "weight" : 0.5,
+          "volume" : 0.0
+        },
+        "quantity" : 2
+      } ],
+      "totalWeight" : 1.0,
+      "totalVolume" : 0.0
+    }, {
+      "id" : 5,
+      "orderDate" : "2025-02-28T11:24:47",
+      "status" : "PENDING",
+      "clientId" : 5,
+      "destinationAddress" : {
+        "id" : 6,
+        "street" : "Karmelicka 18",
+        "city" : "Krakow",
+        "postCode" : "30-002",
+        "latitude" : 50.0651,
+        "longitude" : 19.944
+      },
+      "orderedGoods" : [ {
+        "warehouseId" : 1,
+        "goods" : {
+          "id" : 1,
+          "goodsName" : "Laptop",
+          "description" : "High-end laptop",
+          "weight" : 2.5,
+          "volume" : 0.01
+        },
+        "quantity" : 1
+      } ],
+      "totalWeight" : 2.5,
+      "totalVolume" : 0.01
+    } ],
+    "routes" : [ ]
+  }, {
+    "id" : 3,
+    "departureTime" : "2025-02-28T11:24:47",
+    "estimatedArrivalTime" : "2025-02-28T11:54:47",
+    "type" : "WAREHOUSE_TO_CLIENT",
+    "car" : {
+      "id" : 3,
+      "carType" : "Van",
+      "maxWeightCapacity" : 450.0,
+      "maxVolumeCapacity" : 4.5,
+      "ownerCompanyId" : 1
+    },
+    "orders" : [ {
+      "id" : 6,
+      "orderDate" : "2025-02-28T11:24:47",
+      "status" : "PENDING",
+      "clientId" : 6,
+      "destinationAddress" : {
+        "id" : 7,
+        "street" : "Zakopianska 22",
+        "city" : "Krakow",
+        "postCode" : "30-003",
+        "latitude" : 50.05,
+        "longitude" : 19.93
+      },
+      "orderedGoods" : [ {
+        "warehouseId" : 1,
+        "goods" : {
+          "id" : 3,
+          "goodsName" : "Tablet",
+          "description" : "10-inch tablet",
+          "weight" : 0.5,
+          "volume" : 0.01
+        },
+        "quantity" : 1
+      } ],
+      "totalWeight" : 0.5,
+      "totalVolume" : 0.01
+    }, {
+      "id" : 7,
+      "orderDate" : "2025-02-28T11:24:47",
+      "status" : "PENDING",
+      "clientId" : 7,
+      "destinationAddress" : {
+        "id" : 7,
+        "street" : "Zakopianska 22",
+        "city" : "Krakow",
+        "postCode" : "30-003",
+        "latitude" : 50.05,
+        "longitude" : 19.93
+      },
+      "orderedGoods" : [ {
+        "warehouseId" : 1,
+        "goods" : {
+          "id" : 3,
+          "goodsName" : "Tablet",
+          "description" : "10-inch tablet",
+          "weight" : 0.5,
+          "volume" : 0.01
+        },
+        "quantity" : 2
+      } ],
+      "totalWeight" : 1.0,
+      "totalVolume" : 0.02
+    } ],
+    "routes" : [ ]
+  } ]
+}
