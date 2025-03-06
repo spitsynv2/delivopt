@@ -11,4 +11,5 @@ import java.util.List;
 public interface IOrderDAO extends IDAO<Order,Long> {
     List<Order> readAllByClientId(Long clientId);
     List<Order> readAllByDeliveryId(Long deliveryId);
+    List<Order> readAllByWarehouseId(Long warehouseId);
 }

@@ -1,8 +1,6 @@
 package com.solvd.delivopt.repo.impl.mybatis;
 
-import com.solvd.delivopt.model.Goods;
 import com.solvd.delivopt.model.Warehouse;
-import com.solvd.delivopt.repo.IGoodsDAO;
 import com.solvd.delivopt.repo.IWarehouseDAO;
 import com.solvd.delivopt.util.MyBatisLoader;
 import org.apache.ibatis.session.SqlSession;
@@ -15,7 +13,7 @@ import java.util.List;
  * @author Vadym Spitsyn
  * @created 2025-02-26
  */
-public class WarehouseMyBatisImpl extends AbstractExtendedMyBatisImpl<Warehouse,Long> implements IWarehouseDAO {
+public class WarehouseMyBatisImpl extends AbstractBaseMyBatisImpl<Warehouse,Long> implements IWarehouseDAO {
     private static final Logger log = LogManager.getLogger(WarehouseMyBatisImpl.class);
 
     @Override

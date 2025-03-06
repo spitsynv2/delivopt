@@ -16,6 +16,22 @@ public abstract class AbstractBaseMyBatisImpl<T,ID> implements IDAO<T,ID>{
     private static final Logger log = LogManager.getLogger(AbstractBaseMyBatisImpl.class);
 
     @Override
+    public ID getLastId() {
+        try (SqlSession session = MyBatisLoader.getSqlSessionFactory().openSession()) {
+            Object mapper = session.getMapper(getMapperClass());
+            IDAO<T, ID> daoMapper = (IDAO<T, ID>) mapper;
+
+            ID lastId = daoMapper.getLastId();
+
+            log.info("Last id: {} was successfully read from database", lastId);
+            return lastId;
+        } catch (Exception e) {
+            log.error("Error in getLastId: ", e);
+            return null;
+        }
+    }
+
+    @Override
     public T readById(ID id) {
         try (SqlSession session = MyBatisLoader.getSqlSessionFactory().openSession()) {
             Object mapper = session.getMapper(getMapperClass());

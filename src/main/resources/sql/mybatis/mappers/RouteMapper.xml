@@ -17,6 +17,10 @@
                      select="com.solvd.delivopt.repo.IAddressDAO.readById" column="to_address_id"/>
     </resultMap>
 
+    <select id="getLastId" resultType="Long">
+        SELECT MAX(id) FROM Routes;
+    </select>
+
     <select id="readById" resultMap="RoutesResultMap">
         SELECT * FROM Routes WHERE id = #{id}
     </select>

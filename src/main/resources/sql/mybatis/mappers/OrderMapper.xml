@@ -37,6 +37,15 @@
         )
     </select>
 
+    <select id="readAllByWarehouseId" resultMap="OrdersResultMap">
+        SELECT * FROM Orders
+        WHERE id IN (
+        SELECT DISTINCT order_id
+        FROM Ordered_Warehouse_Goods
+        WHERE warehouse_id = #{id}
+        );
+    </select>
+
     <delete id="deleteById">
         DELETE FROM Orders WHERE id = #{id}
     </delete>
