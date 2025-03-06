@@ -13,7 +13,7 @@ import java.util.List;
  * @author Vadym Spitsyn
  * @created 2025-02-26
  */
-public class GoodsMyBatisImpl extends AbstractExtendedMyBatisImpl<Goods,Long> implements IGoodsDAO {
+public class GoodsMyBatisImpl extends AbstractBaseMyBatisImpl<Goods,Long> implements IGoodsDAO {
     private static final Logger log = LogManager.getLogger(GoodsMyBatisImpl.class);
 
     @Override

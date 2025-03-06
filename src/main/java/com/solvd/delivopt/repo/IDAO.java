@@ -12,4 +12,5 @@ public interface IDAO<T, ID> {
     void create(T entity);
     void update(T entity);
     List<T> readAll();
+    ID getLastId();
 }

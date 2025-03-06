@@ -8,6 +8,9 @@
         <id property="id" column="id"/>
         <result property="warehouseName" column="warehouse_name"/>
         <result property="ownerCompanyId" column="owner_company_id"/>
+
+        <association property="warehouseAddress" javaType="com.solvd.delivopt.model.Address"
+                     select="com.solvd.delivopt.repo.IAddressDAO.readByWarehouseId" column="id"/>
     </resultMap>
 
     <select id="readById" resultMap="WarehouseResultMap">

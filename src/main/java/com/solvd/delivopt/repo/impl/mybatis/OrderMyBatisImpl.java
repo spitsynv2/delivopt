@@ -1,8 +1,6 @@
 package com.solvd.delivopt.repo.impl.mybatis;
 
-import com.solvd.delivopt.model.Car;
 import com.solvd.delivopt.model.Order;
-import com.solvd.delivopt.repo.ICarDAO;
 import com.solvd.delivopt.repo.IOrderDAO;
 import com.solvd.delivopt.util.MyBatisLoader;
 import org.apache.ibatis.session.SqlSession;
@@ -15,7 +13,7 @@ import java.util.List;
  * @author Vadym Spitsyn
  * @created 2025-02-26
  */
-public class OrderMyBatisImpl extends AbstractExtendedMyBatisImpl<Order,Long> implements IOrderDAO {
+public class OrderMyBatisImpl extends AbstractBaseMyBatisImpl<Order,Long> implements IOrderDAO {
     private static final Logger log = LogManager.getLogger(OrderMyBatisImpl.class);
 
     @Override
@@ -54,6 +52,21 @@ public class OrderMyBatisImpl extends AbstractExtendedMyBatisImpl<Order,Long> im
             return orders;
         } catch (Exception e) {
             log.error("Error in readAllByDeliveryId: {}", deliveryId, e);
+            return null;
+        }
+    }
+
+    @Override
+    public List<Order> readAllByWarehouseId(Long warehouseId) {
+        try (SqlSession session = MyBatisLoader.getSqlSessionFactory().openSession()) {
+            IOrderDAO mapper = session.getMapper(IOrderDAO.class);
+
+            List<Order> orders = mapper.readAllByWarehouseId(warehouseId);
+
+            log.info("Orders: {} was successfully read from database, by warehouseId {}", orders, warehouseId);
+            return orders;
+        } catch (Exception e) {
+            log.error("Error in readAllByWarehouseId: {}", warehouseId, e);
             return null;
         }
     }

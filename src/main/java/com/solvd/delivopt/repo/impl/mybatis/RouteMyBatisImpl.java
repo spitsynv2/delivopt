@@ -1,8 +1,6 @@
 package com.solvd.delivopt.repo.impl.mybatis;
 
-import com.solvd.delivopt.model.Order;
 import com.solvd.delivopt.model.Route;
-import com.solvd.delivopt.repo.IOrderDAO;
 import com.solvd.delivopt.repo.IRouteDAO;
 import com.solvd.delivopt.util.MyBatisLoader;
 import org.apache.ibatis.session.SqlSession;
@@ -15,7 +13,7 @@ import java.util.List;
  * @author Vadym Spitsyn
  * @created 2025-02-26
  */
-public class RouteMyBatisImpl extends AbstractExtendedMyBatisImpl<Route, Long> implements IRouteDAO {
+public class RouteMyBatisImpl extends AbstractBaseMyBatisImpl<Route, Long> implements IRouteDAO {
     private static final Logger log = LogManager.getLogger(RouteMyBatisImpl.class);
 
     @Override

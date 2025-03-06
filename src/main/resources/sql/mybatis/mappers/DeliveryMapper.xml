@@ -20,6 +20,10 @@
                     select="com.solvd.delivopt.repo.IRouteDAO.readAllByDeliveryId" column="id"/>
     </resultMap>
 
+    <select id="getLastId" resultType="Long">
+        SELECT MAX(id) FROM Delivery;
+    </select>
+
     <select id="readById" resultMap="DeliveryResultMap">
         SELECT * FROM Delivery WHERE id = #{id}
     </select>

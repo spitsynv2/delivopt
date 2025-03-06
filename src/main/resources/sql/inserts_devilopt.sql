@@ -2,7 +2,7 @@ USE `delivopt`;
 
 INSERT INTO `Address` (`street`, `city`, `postcode`, `latitude`, `longitude`) VALUES
 ('Mazowiecka 1', 'Warsaw', '00-001', 52.2298, 21.0122), -- Warehous
-('Pilsudskiego 15', 'Warsaw', '00-010', 52.2200, 21.0050),
+('Pilsudskiego 15', 'Warsaw', '00-010', 53.2200, 21.0050),
 ('Pulawska 30', 'Warsaw', '00-020', 52.2100, 21.0005),
 ('Saska 45', 'Warsaw', '00-030', 52.2000, 20.9950),
 ('Wilanowska 60', 'Warsaw', '00-040', 52.1900, 20.9900),
@@ -42,7 +42,8 @@ INSERT INTO `Warehouse_Goods` (`warehouse_id`, `goods_id`, `quantity`) VALUES
 (1, 2, 100),
 (1, 3, 25),
 (2, 1, 30),
-(2, 2, 60);
+(2, 2, 60),
+(2, 5, 60);
 
 INSERT INTO `Orders` (`client_id`, `destination_address_id`, `order_date`, `status`) VALUES
 (1, 2, NOW(), 'PENDING'),
@@ -59,8 +60,8 @@ INSERT INTO `Ordered_Warehouse_Goods` (`order_id`, `warehouse_id`, `goods_id`, `
 (3, 1, 1, 1),
 (4, 1, 2, 2),
 (5, 1, 1, 1),
-(6, 1, 3, 1),
-(7, 1, 3, 2);
+(6, 2, 1, 1),
+(7, 2, 5, 25);
 
 INSERT INTO `Car` (`car_type`, `max_weight_capacity`, `max_volume_capacity`, `owner_company_id`) VALUES
 ('Van', 500, 5, 1),
