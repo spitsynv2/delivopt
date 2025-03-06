@@ -1,13 +1,16 @@
 package com.solvd.delivopt;
 
 import com.solvd.delivopt.model.*;
+import com.solvd.delivopt.repo.impl.jaxb.JaxbDeliveryImpl;
+import com.solvd.delivopt.repo.impl.mybatis.DeliveryMyBatisImpl;
+import com.solvd.delivopt.repo.impl.jackson.JacksonDeliveryImpl;
 import com.solvd.delivopt.util.pathfinder.NearestNeighborWithDijkstra;
-import com.solvd.delivopt.util.pathfinder.graphmodel.Edge;
 import com.solvd.delivopt.util.pathfinder.graphmodel.Graph;
 import com.solvd.delivopt.util.pathfinder.HarvesineDistance;
-import com.solvd.delivopt.util.pathfinder.graphmodel.Node;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 public class Runner {
     private static final Logger log = LogManager.getLogger(Runner.class);
@@ -15,23 +18,18 @@ public class Runner {
     public static void main(String[] args) {
         notAllNodesConnectedSimulation();
         allNodesConnectedSimulation();
+        DeliveryMyBatisImpl deliveryMyBatis = new DeliveryMyBatisImpl();
+        List<Delivery> deliveries = deliveryMyBatis.readAll();
+
+        JaxbDeliveryImpl jaxbDelivery = new JaxbDeliveryImpl();
+        log.info(jaxbDelivery.marshalDeliveries(deliveries));
+        log.info(jaxbDelivery.unmarshalDeliveries());
+        JacksonDeliveryImpl jacksonDelivery = new JacksonDeliveryImpl();
+
+        jacksonDelivery.writeListToJsonFile(deliveries);
+        log.info(jacksonDelivery.listFromJsonFile());
     }
-
-    public static void addEdgeWithDistance(Graph graph, Long fromId, Long toId) {
-        Node fromNode = graph.getNode(fromId);
-        Node toNode = graph.getNode(toId);
-
-        double distance = HarvesineDistance.calculateDistance(
-                fromNode.getAddress().getLatitude(),
-                fromNode.getAddress().getLongitude(),
-                toNode.getAddress().getLatitude(),
-                toNode.getAddress().getLongitude()
-        );
-
-        fromNode.addEdge(new Edge(toNode, distance));
-        toNode.addEdge(new Edge(fromNode, distance));
-    }
-
+    
     public static void notAllNodesConnectedSimulation(){
         log.info("notAllNodesConnectedSimulation");
         Graph graph = new Graph();
@@ -82,10 +80,10 @@ public class Runner {
         graph.addNode(4L, client3);
         graph.addNode(5L, client4);
 
-        addEdgeWithDistance(graph, 3L, 4L); // Client 2 -> Client 3
-        addEdgeWithDistance(graph, 1L, 4L); // Warehouse -> Client 3
-        addEdgeWithDistance(graph, 1L, 2L); // Warehouse -> Client 1
-        addEdgeWithDistance(graph, 1L, 5L);
+        graph.addEdgeWithDistance(3L, 4L); // Client 2 -> Client 3
+        graph.addEdgeWithDistance(1L, 4L); // Warehouse -> Client 3
+        graph.addEdgeWithDistance(1L, 2L); // Warehouse -> Client 1
+        graph.addEdgeWithDistance(1L, 5L); // Warehouse -> Client 4
 
         double distance1_4 = HarvesineDistance.calculateDistance(
                 graph.getNode(1L).getAddress().getLatitude(),
@@ -166,14 +164,14 @@ public class Runner {
         graph.addNode(3L, client2);
         graph.addNode(4L, client3);
 
-        addEdgeWithDistance(graph, 1L, 2L); // Warehouse -> Client 1
-        addEdgeWithDistance(graph, 1L, 3L); // Warehouse -> Client 2
-        addEdgeWithDistance(graph, 1L, 4L); // Warehouse -> Client 3
+        graph.addEdgeWithDistance(1L, 2L); // Warehouse -> Client 1
+        graph.addEdgeWithDistance(1L, 3L); // Warehouse -> Client 2
+        graph.addEdgeWithDistance(1L, 4L); // Warehouse -> Client 3
 
-        addEdgeWithDistance(graph, 2L, 3L); //  Client 1 -> Client 2
-        addEdgeWithDistance(graph, 2L, 4L); //  Client 1 -> Client 3
+        graph.addEdgeWithDistance(2L, 3L); //  Client 1 -> Client 2
+        graph.addEdgeWithDistance(2L, 4L); //  Client 1 -> Client 3
 
-        addEdgeWithDistance(graph, 3L, 4L); //  Client 2 -> Client 3
+        graph.addEdgeWithDistance(3L, 4L); //  Client 2 -> Client 3
 
 
         double distance1_2 = HarvesineDistance.calculateDistance(

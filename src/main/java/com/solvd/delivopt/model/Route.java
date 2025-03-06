@@ -1,17 +1,40 @@
 package com.solvd.delivopt.model;
 
+import com.solvd.delivopt.util.LocalDateTimeAdapter;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import java.time.LocalDateTime;
 
 /**
  * @author Vadym Spitsyn
  * @created 2025-02-26
  */
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Route {
+
+    @XmlElement
     private Long id;
+
+    @XmlElement
     private Address fromAddress;
+
+    @XmlElement
     private Address toAddress;
+
+    @XmlElement
     private Double distanceKm;
+
+    @XmlElement
     private Integer estimatedTimeMin;
+
+    @XmlElement
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime lastUpdated;
 
     public Route() {}
