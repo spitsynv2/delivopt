@@ -1,9 +1,14 @@
 package com.solvd.delivopt.model;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author Vadym Spitsyn
  * @created 2025-02-26
  */
+
+@XmlRootElement(name = "Address")
 public class Address {
     private Long id;
     private String street;
@@ -23,6 +28,7 @@ public class Address {
 
     public Address() {}
 
+    @XmlElement
     public Long getId() {
         return id;
     }
@@ -31,6 +37,7 @@ public class Address {
         this.id = id;
     }
 
+    @XmlElement
     public String getStreet() {
         return street;
     }
@@ -39,6 +46,7 @@ public class Address {
         this.street = street;
     }
 
+    @XmlElement
     public String getCity() {
         return city;
     }
@@ -47,6 +55,7 @@ public class Address {
         this.city = city;
     }
 
+    @XmlElement
     public String getPostCode() {
         return postCode;
     }
@@ -55,6 +64,7 @@ public class Address {
         this.postCode = postCode;
     }
 
+    @XmlElement
     public Double getLatitude() {
         return latitude;
     }
@@ -63,6 +73,7 @@ public class Address {
         this.latitude = latitude;
     }
 
+    @XmlElement
     public Double getLongitude() {
         return longitude;
     }
