@@ -1,4 +1,4 @@
-package com.solvd.delivopt.util.pathfinder;
+package com.solvd.delivopt.model.graphmodel;
 
 public class EdgeDistances {
     private Long fromNodeId;

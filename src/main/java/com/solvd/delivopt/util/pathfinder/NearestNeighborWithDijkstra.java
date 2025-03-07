@@ -1,7 +1,7 @@
 package com.solvd.delivopt.util.pathfinder;
 
-import com.solvd.delivopt.util.pathfinder.graphmodel.Graph;
-import com.solvd.delivopt.util.pathfinder.graphmodel.Node;
+import com.solvd.delivopt.model.graphmodel.Graph;
+import com.solvd.delivopt.model.graphmodel.Node;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

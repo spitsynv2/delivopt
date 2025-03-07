@@ -1,18 +1,11 @@
 package com.solvd.delivopt;
 
 import com.solvd.delivopt.model.*;
-import com.solvd.delivopt.repo.IWarehouseDAO;
-import com.solvd.delivopt.repo.impl.jaxb.JaxbDeliveryImpl;
 import com.solvd.delivopt.repo.impl.mybatis.CarMyBatisImpl;
-import com.solvd.delivopt.repo.impl.mybatis.DeliveryMyBatisImpl;
-import com.solvd.delivopt.repo.impl.jackson.JacksonDeliveryImpl;
 import com.solvd.delivopt.repo.impl.mybatis.OrderMyBatisImpl;
 import com.solvd.delivopt.repo.impl.mybatis.WarehouseMyBatisImpl;
 import com.solvd.delivopt.service.DeliveryService;
 import com.solvd.delivopt.service.OrderDeliveryService;
-import com.solvd.delivopt.util.pathfinder.NearestNeighborWithDijkstra;
-import com.solvd.delivopt.util.pathfinder.graphmodel.Graph;
-import com.solvd.delivopt.util.pathfinder.HarvesineDistance;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

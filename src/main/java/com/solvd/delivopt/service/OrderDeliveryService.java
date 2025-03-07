@@ -5,9 +5,9 @@ import com.solvd.delivopt.model.enums.DeliveryType;
 import com.solvd.delivopt.repo.impl.mybatis.DeliveryMyBatisImpl;
 import com.solvd.delivopt.repo.impl.mybatis.RouteMyBatisImpl;
 import com.solvd.delivopt.util.pathfinder.NearestNeighborWithDijkstra;
-import com.solvd.delivopt.util.pathfinder.graphmodel.Edge;
-import com.solvd.delivopt.util.pathfinder.graphmodel.Graph;
-import com.solvd.delivopt.util.pathfinder.graphmodel.Node;
+import com.solvd.delivopt.model.graphmodel.Edge;
+import com.solvd.delivopt.model.graphmodel.Graph;
+import com.solvd.delivopt.model.graphmodel.Node;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
