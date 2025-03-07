@@ -1,9 +1,9 @@
 package com.solvd.delivopt.util.pathfinder;
 
-import com.solvd.delivopt.util.pathfinder.graphmodel.Edge;
-import com.solvd.delivopt.util.pathfinder.graphmodel.Graph;
-import com.solvd.delivopt.util.pathfinder.graphmodel.Node;
-import com.solvd.delivopt.util.pathfinder.graphmodel.NodeDistancePair;
+import com.solvd.delivopt.model.graphmodel.Edge;
+import com.solvd.delivopt.model.graphmodel.Graph;
+import com.solvd.delivopt.model.graphmodel.Node;
+import com.solvd.delivopt.model.graphmodel.NodeDistancePair;
 
 import java.util.Comparator;
 import java.util.HashMap;

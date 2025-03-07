@@ -1,4 +1,4 @@
-package com.solvd.delivopt.util.pathfinder.graphmodel;
+package com.solvd.delivopt.model.graphmodel;
 
 /**
  * @author Vadym Spitsyn
