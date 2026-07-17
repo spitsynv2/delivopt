@@ -32,6 +32,21 @@ public class ConfigLoader {
     }
 
     public static String getProperty(String key) {
-        return properties.getProperty(key);
+        String environmentValue = System.getenv(key);
+        return environmentValue != null ? environmentValue : properties.getProperty(key);
+    }
+
+    public static Properties getProperties() {
+        Properties resolvedProperties = new Properties();
+        resolvedProperties.putAll(properties);
+
+        for (String key : properties.stringPropertyNames()) {
+            String environmentValue = System.getenv(key);
+            if (environmentValue != null) {
+                resolvedProperties.setProperty(key, environmentValue);
+            }
+        }
+
+        return resolvedProperties;
     }
 }

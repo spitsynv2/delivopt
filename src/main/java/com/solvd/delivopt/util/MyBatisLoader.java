@@ -26,7 +26,7 @@ public class MyBatisLoader {
                 log.error("mybatis-config.xml file not found.");
                 throw new RuntimeException("mybatis-config.xml file not found.");
             }
-            sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream, ConfigLoader.getProperties());
         } catch (IOException e) {
             log.error("Error initializing MyBatis", e);
             throw new RuntimeException("MyBatis initialization failed", e);
